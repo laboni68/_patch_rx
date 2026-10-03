@@ -2,7 +2,7 @@
 
 ## Dataset
 The patch corpus used in the DeepDiff paper: 630 candidate patches across 118 vulnerabilities from 40 open-source projects, derived from [CyberGym-E2E](https://github.com/sunblaze-ucb/cybergym-e2e).
-The patches are saved in the ```patches``` folder.
+The patches are saved in the ```patches``` folder. To run the vulnerable projects with our regression-freedom checking approach, they need to follow the structure of the cyberGym data format (with data and project sub folder containing the patch_N.diff/patch.diff).
 
 ## Metadata
 - ```cybergym_630.xlsx``` contains the results of the CyberGym evaluation pipeline (testing with triggering input TT and developer written/unit tests RT).
@@ -13,9 +13,13 @@ The patches are saved in the ```patches``` folder.
 - ```deepdiff_pipeline.sh``` is the script for running the dynamic analysis pipeline of our regression-freedom checking approach which uses internally other scripts like ```gen_benign.py``` and ```instrument_writes.py``` files.
 - Requires Docker with access to the OSS-Fuzz base images. Reading a matrix:
 `benign = EQUIVALENT` means it preserves valid-input behaviour; a good patch is EQUIVALENT on every benign input.
+- ```run_all_deepdiff.sh``` runs the ```deepdiff_pipeline.sh``` for the projects. ```scripts/run_all_deepdiff.sh --use-existing-pocs``` will use the existing benign inputs generated to run dynamic analysis (default root folder: subset_cyberGym/projects like cybergym)
+
+## benign_inputs_neuro_deepdiff
+- the benign inputs are concrete benign inputs generated from the candidate witnesses from the neuro-deepdiff.
 
 
-#### Metrics
+## Metrics
 
 `matrix_classify.py` scores the matrices into the reported numbers — incorrect-patch
 recall, developer-patch precision, per-class and averaged F1, and the false-alarm
