@@ -1,0 +1,6 @@
+# benign: parse_line empty-arg position report
+global
+	nbthread 1
+	timeout connect 5s
+	setenv DEEPFIX_A "" mid "" tail
+	daemon

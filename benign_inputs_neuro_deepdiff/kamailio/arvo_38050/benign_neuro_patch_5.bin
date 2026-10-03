@@ -1,0 +1,10 @@
+OPTIONS sip:a@b SIP/2.0
+Via: SIP/2.0/UDP h.com;branch=z9hG4bKa
+From: <sip:a@b>;tag=1
+To: <sip:a@b>
+Call-ID: 1@h.com
+CSeq: 1 OPTIONS
+Content-Length: 5
+	X: y
+
+hello

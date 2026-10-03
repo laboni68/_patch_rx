@@ -1,0 +1,4 @@
+@HD	VN:1.6	SO:coordinate
+@SQ	SN:chr1	LN:100000
+r0	0	chr1	100	60	10M	*	0	0	ACGTACGTAC	IIIIIIIIII
+r1	4	*	0	0	*	*	0	0	ACGTACGTAC	**********

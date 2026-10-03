@@ -1,0 +1,8 @@
+INVITE sip:a@b SIP/2.0
+Via: SIP/2.0/UDP h
+l:5x
+To: <sip:a@b>
+From: <sip:c@d>
+Call-ID: 1
+CSeq: 1 INVITE
+

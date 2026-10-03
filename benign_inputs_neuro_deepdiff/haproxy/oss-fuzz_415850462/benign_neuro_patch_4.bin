@@ -1,0 +1,6 @@
+# benign parse_line regression: few args, no overflow
+global
+	nbthread 1
+	timeout connect 5s
+	setenv FOO "" bar ""
+	daemon

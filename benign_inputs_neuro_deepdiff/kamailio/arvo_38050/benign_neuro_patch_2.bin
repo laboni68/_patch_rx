@@ -1,0 +1,12 @@
+OPTIONS sip:bob@example.org SIP/2.0
+Via: SIP/2.0/UDP pc.example.org;branch=z9hG4bK776a
+Max-Forwards: 70
+From: <sip:alice@example.org>;tag=9f8
+To: <sip:bob@example.org>
+Call-ID: 7c2a@pc.example.org
+CSeq: 42 OPTIONS
+Content-Type: text/plain
+Content-Length: 1
+	
+
+X

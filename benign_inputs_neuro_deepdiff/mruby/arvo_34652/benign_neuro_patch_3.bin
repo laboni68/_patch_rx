@@ -1,0 +1,5 @@
+puts sprintf("%f", 0.5)
+puts sprintf("%.3f", 0.25)
+puts sprintf("%.3f", 0.125)
+puts sprintf("%.2f", 0.5)
+puts sprintf("%.30f", 0.0001)

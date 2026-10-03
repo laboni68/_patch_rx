@@ -1,0 +1,8 @@
+fmts = ["%.3g", "%.2f", "%.6f", "%.3f", "%.19g", "%.60f", "%.30f"]
+vals = [0.25, 0.25, 0.25, 0.25, 1e-4, 1e-30, 1e-20]
+i = 0
+while i < 7
+  puts(fmts[i] % vals[i])
+  puts(sprintf(fmts[i], vals[i]))
+  i += 1
+end

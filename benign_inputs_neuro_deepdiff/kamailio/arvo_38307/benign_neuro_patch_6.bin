@@ -1,0 +1,9 @@
+OPTIONS sip:a@b SIP/2.0
+Via: SIP/2.0/UDP host.example.com:5060;branch=z9hG4bK1 (comment), SIP/2.0/UDP 1.2.3.4:5060;branch=z9hG4bK2
+Max-Forwards: 70
+To: <sip:a@b>
+From: <sip:c@d>;tag=1
+Call-ID: abc@host.example.com
+CSeq: 1 OPTIONS
+Content-Length: 0
+

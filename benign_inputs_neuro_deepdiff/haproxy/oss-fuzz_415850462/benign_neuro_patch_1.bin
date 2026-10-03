@@ -1,0 +1,5 @@
+# benign empty-arg parse_line regression
+global
+    timeout connect ""
+    ""
+    nbthread 1

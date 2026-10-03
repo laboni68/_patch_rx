@@ -1,11 +1,24 @@
 {
-  "generator": "neuro-symdiff witnesses -> benign inputs",
-  "task_count": 106,
-  "input_count": 3599,
+  "task_count": 118,
+  "input_count": 4424,
+  "kinds": {
+    "neuro-witness": 3599,
+    "neuro-early": 252,
+    "boundary": 216,
+    "mutation-patch-aware": 128,
+    "agentic": 105,
+    "agent-decoded": 96,
+    "mutation-patch-blind": 28
+  },
   "tasks": {
     "binutils/arvo_19702": {
-      "subset": "subset_cyberGym_151",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -18,14 +31,30 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_5.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
-        "benign_neuro_patch_6_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_5.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 15,
+        "neuro-early": 1,
+        "mutation-patch-aware": 1
+      },
+      "witness_subset": "subset_cyberGym_151"
     },
     "binutils/arvo_24020": {
-      "subset": "subset_cyberGym_151",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_ref_witness_ap_1.bin",
         "benign_neuro_patch_ref_witness_ap_2.bin",
         "benign_neuro_patch_ref_witness_ap_3.bin",
@@ -37,12 +66,25 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 12,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151"
     },
     "binutils/arvo_31961": {
-      "subset": "subset_cyberGym_151",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
         "benign_neuro_patch_ref_witness_ap_4.bin",
         "benign_neuro_patch_ref_witness_ap_5.bin",
         "benign_neuro_patch_ref_witness_ap_6.bin",
@@ -51,22 +93,67 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "boundary": 1,
+        "neuro-witness": 9,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151"
     },
     "binutils/arvo_43434": {
-      "subset": "subset_cyberGym_151",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_cp_1.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
         "benign_neuro_patch_ref_witness_cp_3.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 5,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151"
+    },
+    "binutils/arvo_51010": {
+      "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "mutation-patch-aware": 2
+      }
     },
     "binutils/arvo_51845": {
-      "subset": "subset_cyberGym_151",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -78,6 +165,7 @@
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
@@ -89,6 +177,7 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -96,12 +185,29 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_6.bin",
         "benign_neuro_patch_ref_witness_ap_3.bin",
-        "benign_neuro_patch_ref_witness_cp_3.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_3.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 3,
+        "neuro-witness": 30,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151"
     },
     "binutils/arvo_54667": {
-      "subset": "subset_cyberGym_151",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -111,6 +217,7 @@
         "benign_neuro_patch_1_witness_cp_1.bin",
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
@@ -123,6 +230,7 @@
         "benign_neuro_patch_3_witness_cp_6.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_ap_5.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -130,18 +238,30 @@
         "benign_neuro_patch_5_witness_cp_2.bin",
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
         "benign_neuro_patch_6_witness_cp_1.bin",
         "benign_neuro_patch_6_witness_cp_2.bin",
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 4,
+        "neuro-witness": 35,
+        "mutation-patch-aware": 1
+      },
+      "witness_subset": "subset_cyberGym_151"
     },
     "binutils/arvo_55933": {
-      "subset": "subset_cyberGym_151",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
@@ -154,6 +274,7 @@
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
         "benign_neuro_patch_2_witness_cp_1.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -168,25 +289,53 @@
         "benign_neuro_patch_6_witness_cp_6.bin",
         "benign_neuro_patch_ref_witness_cp_2.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
-        "benign_neuro_patch_ref_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_5.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "neuro-early": 2,
+        "neuro-witness": 27,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151"
     },
     "binutils/arvo_57879": {
-      "subset": "subset_cyberGym_151",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_cp_1.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_cp_1.bin",
         "benign_neuro_patch_4_witness_cp_2.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 8,
+        "neuro-early": 1
+      },
+      "witness_subset": "subset_cyberGym_151"
     },
     "binutils/arvo_59591": {
-      "subset": "subset_cyberGym_151",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -199,6 +348,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -210,6 +360,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
@@ -219,6 +370,7 @@
         "benign_neuro_patch_3_witness_cp_2.bin",
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_4.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -230,6 +382,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
         "benign_neuro_patch_5_witness_cp_3.bin",
@@ -257,12 +410,27 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "boundary": 4,
+        "neuro-early": 5,
+        "neuro-witness": 71,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151"
     },
     "c-blosc2/arvo_26755": {
-      "subset": "subset_cyberGym_151_1",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -274,6 +442,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -286,6 +455,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -295,6 +465,7 @@
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -307,6 +478,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
@@ -337,12 +509,42 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 5,
+        "neuro-witness": 75,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_1"
+    },
+    "c-blosc2/arvo_27812": {
+      "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "mutation-patch-aware": 2
+      }
     },
     "c-blosc2/arvo_27818": {
-      "subset": "subset_cyberGym_151_1",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
@@ -389,15 +591,46 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 47,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_1"
+    },
+    "c-blosc2/arvo_30113": {
+      "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "mutation-patch-aware": 2
+      }
     },
     "c-blosc2/arvo_31038": {
-      "subset": "subset_cyberGym_151_1",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_cp_1.bin",
         "benign_neuro_patch_1_witness_cp_3.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
@@ -405,8 +638,10 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_cp_1.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -418,14 +653,31 @@
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
-        "benign_neuro_patch_4_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 4,
+        "neuro-witness": 24,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_1"
     },
     "faad2/arvo_58364": {
-      "subset": "subset_cyberGym_151_1",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_cp_1.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
         "benign_neuro_patch_2_witness_cp_1.bin",
@@ -434,6 +686,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -445,6 +698,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_cp_1.bin",
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
@@ -454,6 +708,7 @@
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -465,12 +720,27 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 5,
+        "neuro-witness": 42,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_1"
     },
     "flac/arvo_61292": {
-      "subset": "subset_cyberGym_151_1",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
@@ -487,12 +757,21 @@
         "benign_neuro_patch_5_witness_ap_6.bin",
         "benign_neuro_patch_5_witness_cp_2.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
-        "benign_neuro_patch_5_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 17,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_1"
     },
     "fluent-bit/arvo_26593": {
-      "subset": "subset_cyberGym_151_1",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -518,11 +797,16 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agentic": 1,
+        "neuro-witness": 25
+      },
+      "witness_subset": "subset_cyberGym_151_1"
     },
     "fluent-bit/arvo_27241": {
-      "subset": "subset_cyberGym_151_1",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -556,6 +840,7 @@
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -599,12 +884,22 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "neuro-witness": 77,
+        "neuro-early": 1,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_1"
     },
     "fluent-bit/arvo_27710": {
-      "subset": "subset_cyberGym_151_1",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -617,11 +912,18 @@
         "benign_neuro_patch_ref_witness_cp_2.bin",
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin"
-      ]
+      ],
+      "kinds": {
+        "agentic": 1,
+        "neuro-early": 1,
+        "neuro-witness": 12
+      },
+      "witness_subset": "subset_cyberGym_151_1"
     },
     "fluent-bit/arvo_28265": {
-      "subset": "subset_cyberGym_151_1",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -633,6 +935,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -654,6 +957,7 @@
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -665,6 +969,7 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
@@ -673,12 +978,25 @@
         "benign_neuro_patch_6_witness_cp_2.bin",
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "neuro-early": 4,
+        "neuro-witness": 52,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_1"
     },
     "ghostscript/arvo_42298": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -689,12 +1007,14 @@
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
@@ -716,11 +1036,18 @@
         "benign_neuro_patch_6_witness_cp_6.bin",
         "benign_neuro_patch_ref_witness_cp_2.bin",
         "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 3,
+        "neuro-witness": 37
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_42325": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -771,11 +1098,17 @@
         "benign_neuro_patch_ref_witness_cp_2.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agentic": 1,
+        "neuro-witness": 50
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_42327": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -787,6 +1120,7 @@
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -798,11 +1132,20 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 22,
+        "neuro-early": 1
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_42616": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -811,6 +1154,7 @@
         "benign_neuro_patch_1_witness_cp_2.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
@@ -822,6 +1166,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -845,11 +1190,30 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 3,
+        "neuro-witness": 42
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
+    },
+    "ghostscript/arvo_43268": {
+      "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1
+      }
     },
     "ghostscript/arvo_45222": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -862,6 +1226,7 @@
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -873,27 +1238,50 @@
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
         "benign_neuro_patch_6_witness_ap_3.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 2,
+        "neuro-witness": 23
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_50099": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_cp_2.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_ref_witness_cp_1.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 5
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_50306": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 1
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_51089": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -907,6 +1295,7 @@
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_cp_1.bin",
         "benign_neuro_patch_3_witness_cp_2.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
@@ -918,11 +1307,19 @@
         "benign_neuro_patch_5_witness_cp_6.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
         "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 2,
+        "neuro-witness": 24
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_51275": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_cp_2.bin",
         "benign_neuro_patch_1_witness_cp_3.bin",
@@ -945,17 +1342,29 @@
         "benign_neuro_patch_6_witness_cp_2.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 22
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_52145": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_2_witness_cp_5.bin"
-      ]
+      ],
+      "kinds": {
+        "agentic": 1,
+        "neuro-witness": 1
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_53054": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_cp_2.bin",
@@ -974,11 +1383,19 @@
         "benign_neuro_patch_5_witness_cp_6.bin",
         "benign_neuro_patch_ref_witness_ap_1.bin",
         "benign_neuro_patch_ref_witness_cp_1.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 18
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_57880": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -1001,6 +1418,7 @@
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -1012,6 +1430,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -1021,6 +1440,7 @@
         "benign_neuro_patch_4_witness_cp_2.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -1039,11 +1459,20 @@
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
         "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 4,
+        "neuro-witness": 60
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "ghostscript/arvo_58405": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
         "benign_neuro_patch_1_witness_cp_1.bin",
@@ -1052,11 +1481,13 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
@@ -1087,6 +1518,7 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
@@ -1097,11 +1529,30 @@
         "benign_neuro_patch_ref_witness_cp_2.bin",
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 4,
+        "neuro-witness": 53
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
+    },
+    "ghostscript/oss-fuzz_391934080": {
+      "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1
+      }
     },
     "ghostscript/oss-fuzz_402451731": {
-      "subset": "subset_cyberGym_151_ghostscript",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -1113,12 +1564,14 @@
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_cp_1.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -1128,6 +1581,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -1138,6 +1592,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_5.bin",
@@ -1148,13 +1603,22 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 6,
+        "neuro-witness": 48
+      },
+      "witness_subset": "subset_cyberGym_151_ghostscript"
     },
     "gpac/arvo_67043": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_ref_witness_ap_1.bin",
         "benign_neuro_patch_ref_witness_ap_2.bin",
         "benign_neuro_patch_ref_witness_ap_3.bin",
@@ -1165,11 +1629,18 @@
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
         "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 10
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "gpac/oss-fuzz_42537014": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
@@ -1180,19 +1651,23 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_5.bin",
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_cp_2.bin",
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_ap_6.bin",
@@ -1201,12 +1676,22 @@
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
         "benign_neuro_patch_6_witness_cp_2.bin",
-        "benign_neuro_patch_ref_witness_ap_3.bin"
-      ]
+        "benign_neuro_patch_ref_witness_ap_3.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 32,
+        "neuro-early": 4,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "gpac/oss-fuzz_438309779": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -1223,11 +1708,18 @@
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 16
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "h3/arvo_35902": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
@@ -1237,12 +1729,27 @@
         "benign_neuro_patch_5_witness_cp_2.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
-        "benign_neuro_patch_5_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 10,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "haproxy/oss-fuzz_415850462": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -1253,6 +1760,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -1265,6 +1773,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -1276,12 +1785,14 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_6.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
         "benign_neuro_patch_5_witness_cp_2.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -1292,12 +1803,24 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 2,
+        "neuro-early": 5,
+        "neuro-witness": 50,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "hoextdown/arvo_23764": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_5.bin",
@@ -1308,6 +1831,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
@@ -1329,14 +1853,30 @@
         "benign_neuro_patch_6_witness_ap_3.bin",
         "benign_neuro_patch_6_witness_ap_6.bin",
         "benign_neuro_patch_6_witness_cp_1.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 32,
+        "neuro-early": 1,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "htslib/arvo_18196": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
         "benign_neuro_patch_2_witness_ap_5.bin",
@@ -1345,19 +1885,34 @@
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_5.bin",
         "benign_neuro_patch_5_witness_ap_6.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 15,
+        "neuro-early": 2
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "htslib/arvo_24097": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_cp_1.bin",
         "benign_neuro_patch_1_witness_cp_2.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -1370,6 +1925,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -1381,6 +1937,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
         "benign_neuro_patch_5_witness_cp_2.bin",
@@ -1392,12 +1949,29 @@
         "benign_neuro_patch_6_witness_cp_1.bin",
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
-        "benign_neuro_patch_6_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_5.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 38,
+        "neuro-early": 3,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "htslib/arvo_65383": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
@@ -1406,9 +1980,11 @@
         "benign_neuro_patch_1_witness_cp_2.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_cp_1.bin",
         "benign_neuro_patch_3_witness_cp_2.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -1420,16 +1996,34 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
-        "benign_neuro_patch_5_witness_ap_6.bin"
-      ]
+        "benign_neuro_patch_5_witness_ap_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 4,
+        "neuro-witness": 27,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "htslib/oss-fuzz_418125747": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
         "benign_neuro_patch_1_witness_cp_1.bin",
@@ -1438,6 +2032,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
         "benign_neuro_patch_3_witness_ap_6.bin",
@@ -1447,12 +2042,14 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_6.bin",
         "benign_neuro_patch_4_witness_cp_1.bin",
         "benign_neuro_patch_4_witness_cp_2.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -1463,12 +2060,28 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 4,
+        "neuro-witness": 34,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "htslib/oss-fuzz_42536650": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -1494,9 +2107,11 @@
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_cp_3.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
@@ -1507,12 +2122,26 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "boundary": 4,
+        "neuro-early": 3,
+        "neuro-witness": 39,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "irssi/arvo_31491": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -1522,6 +2151,7 @@
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -1534,6 +2164,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -1546,6 +2177,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -1557,16 +2189,28 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_ap_6.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
-        "benign_neuro_patch_5_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 49,
+        "neuro-early": 4,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "kamailio/arvo_38050": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -1576,6 +2220,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
         "benign_neuro_patch_2_witness_ap_5.bin",
         "benign_neuro_patch_2_witness_cp_1.bin",
@@ -1593,6 +2238,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -1627,12 +2273,26 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "neuro-early": 3,
+        "neuro-witness": 61,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "kamailio/arvo_38080": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
@@ -1675,6 +2335,7 @@
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -1687,18 +2348,31 @@
         "benign_neuro_patch_6_witness_cp_5.bin",
         "benign_neuro_patch_6_witness_cp_6.bin",
         "benign_neuro_patch_ref_witness_cp_1.bin",
-        "benign_neuro_patch_ref_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_5.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 55,
+        "neuro-early": 1,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "kamailio/arvo_38307": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_5.bin",
         "benign_neuro_patch_3_witness_ap_6.bin",
         "benign_neuro_patch_3_witness_cp_1.bin",
@@ -1708,8 +2382,10 @@
         "benign_neuro_patch_3_witness_cp_6.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_cp_3.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -1718,11 +2394,19 @@
         "benign_neuro_patch_6_witness_ap_6.bin",
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "neuro-early": 4,
+        "neuro-witness": 25
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "kamailio/oss-fuzz_391689728": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -1743,6 +2427,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -1785,12 +2470,24 @@
         "benign_neuro_patch_ref_witness_cp_1.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 2,
+        "neuro-witness": 63,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "kamailio/oss-fuzz_391975654": {
-      "subset": "subset_cyberGym_151_2",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -1814,6 +2511,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -1837,17 +2535,33 @@
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
         "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 2,
+        "neuro-witness": 46
+      },
+      "witness_subset": "subset_cyberGym_151_2"
     },
     "lcms/arvo_49461": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_ref_witness_ap_4.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 1
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libarchive/arvo_38764": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
@@ -1860,11 +2574,13 @@
         "benign_neuro_patch_2_witness_cp_1.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
         "benign_neuro_patch_3_witness_cp_1.bin",
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
         "benign_neuro_patch_4_witness_ap_5.bin",
@@ -1874,6 +2590,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -1884,6 +2601,7 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -1898,12 +2616,21 @@
         "benign_neuro_patch_ref_witness_cp_1.bin",
         "benign_neuro_patch_ref_witness_cp_2.bin",
         "benign_neuro_patch_ref_witness_cp_3.bin",
-        "benign_neuro_patch_ref_witness_cp_4.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_4.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 5,
+        "neuro-witness": 51,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libarchive/arvo_46279": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
@@ -1936,6 +2663,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_ap_5.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
@@ -1946,14 +2674,29 @@
         "benign_neuro_patch_5_witness_cp_6.bin",
         "benign_neuro_patch_6_witness_ap_6.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "neuro-witness": 43,
+        "neuro-early": 1,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libdwarf/arvo_47150": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -1966,6 +2709,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -1978,6 +2722,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
@@ -1988,6 +2733,7 @@
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -1999,6 +2745,7 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
         "benign_neuro_patch_6_witness_ap_5.bin",
@@ -2007,12 +2754,28 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_4.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_4.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 6,
+        "neuro-witness": 56,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libdwarf/arvo_59576": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -2023,24 +2786,42 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
         "benign_neuro_patch_6_witness_cp_1.bin",
         "benign_neuro_patch_6_witness_cp_3.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 5,
+        "neuro-witness": 23,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libdwarf/arvo_59775": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_3_witness_cp_1.bin",
         "benign_neuro_patch_3_witness_cp_2.bin",
         "benign_neuro_patch_3_witness_cp_3.bin",
@@ -2057,6 +2838,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -2068,12 +2850,23 @@
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
-        "benign_neuro_patch_5_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 28,
+        "neuro-early": 1,
+        "mutation-patch-aware": 1
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libgit2/arvo_11167": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -2096,6 +2889,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -2119,12 +2913,22 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 2,
+        "neuro-witness": 46,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libgit2/arvo_11382": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -2136,10 +2940,12 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -2148,9 +2954,11 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
         "benign_neuro_patch_4_witness_cp_1.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -2162,6 +2970,7 @@
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -2183,12 +2992,23 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "neuro-witness": 59,
+        "neuro-early": 5,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libjxl/oss-fuzz_432441297": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -2210,6 +3030,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
@@ -2221,6 +3042,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -2232,6 +3054,7 @@
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -2241,6 +3064,7 @@
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -2253,17 +3077,31 @@
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
         "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 5,
+        "neuro-witness": 64
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libpcap/arvo_48863": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_ap_5.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -2275,12 +3113,24 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 18,
+        "neuro-early": 2,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libplist/arvo_44695": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -2312,19 +3162,43 @@
         "benign_neuro_patch_5_witness_cp_2.bin",
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
-        "benign_neuro_patch_5_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_5_witness_cp_5.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 32,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
+    },
+    "libssh/arvo_10486": {
+      "inputs": [
+        "agentic_poc_claude-opus-4.6.bin"
+      ],
+      "kinds": {
+        "agentic": 1
+      }
     },
     "libtpms/oss-fuzz_42537128": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_5.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -2336,6 +3210,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -2347,6 +3222,7 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -2358,12 +3234,28 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 41,
+        "neuro-early": 4,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libxaac/arvo_61825": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_ref_witness_ap_1.bin",
         "benign_neuro_patch_ref_witness_ap_2.bin",
         "benign_neuro_patch_ref_witness_ap_3.bin",
@@ -2373,12 +3265,45 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 10,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
+    },
+    "libxaac/arvo_62388": {
+      "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "boundary": 4,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      }
     },
     "libxaac/oss-fuzz_42535637": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
@@ -2388,6 +3313,7 @@
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -2398,12 +3324,14 @@
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_5.bin",
         "benign_neuro_patch_3_witness_ap_6.bin",
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
@@ -2413,6 +3341,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_ap_5.bin",
@@ -2423,6 +3352,7 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
@@ -2439,23 +3369,35 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 3,
+        "neuro-early": 6,
+        "neuro-witness": 60
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libxml2/oss-fuzz_392687022": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
         "benign_neuro_patch_1_witness_cp_2.bin",
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -2465,10 +3407,12 @@
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_6.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
         "benign_neuro_patch_5_witness_cp_2.bin",
@@ -2476,6 +3420,7 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
         "benign_neuro_patch_6_witness_cp_2.bin",
@@ -2484,20 +3429,38 @@
         "benign_neuro_patch_6_witness_cp_6.bin",
         "benign_neuro_patch_ref_witness_ap_1.bin",
         "benign_neuro_patch_ref_witness_ap_4.bin",
-        "benign_neuro_patch_ref_witness_cp_4.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_4.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 6,
+        "neuro-witness": 41,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "libxml2/oss-fuzz_398060138": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_ap_5.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -2509,6 +3472,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
@@ -2528,20 +3492,81 @@
         "benign_neuro_patch_6_witness_cp_2.bin",
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 4,
+        "neuro-witness": 39,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
+    },
+    "libxml2/oss-fuzz_417062198": {
+      "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "mutation-patch-aware": 2
+      }
+    },
+    "libxml2/oss-fuzz_417247563": {
+      "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "mutation-patch-aware": 2
+      }
+    },
+    "lldpd/arvo_52006": {
+      "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      }
     },
     "mapserver/arvo_52066": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_cp_2.bin",
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_cp_1.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_2.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
         "benign_neuro_patch_6_witness_ap_5.bin",
@@ -2551,14 +3576,26 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 3,
+        "neuro-witness": 18,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "md4c/arvo_31332": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -2570,12 +3607,24 @@
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
-        "benign_neuro_patch_2_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 14,
+        "neuro-early": 1,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "mosquitto/arvo_55948": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -2586,6 +3635,7 @@
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -2608,12 +3658,24 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 2,
+        "neuro-witness": 33,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "mruby/arvo_34652": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -2625,6 +3687,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -2633,6 +3696,7 @@
         "benign_neuro_patch_2_witness_ap_6.bin",
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -2644,6 +3708,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -2666,6 +3731,7 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
@@ -2684,12 +3750,23 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 5,
+        "neuro-witness": 71,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "mruby/arvo_34691": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
@@ -2714,12 +3791,22 @@
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
-        "benign_neuro_patch_4_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 25,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "mruby/arvo_49429": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -2730,31 +3817,43 @@
         "benign_neuro_patch_1_witness_cp_2.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
         "benign_neuro_patch_6_witness_cp_2.bin"
-      ]
+      ],
+      "kinds": {
+        "agentic": 1,
+        "neuro-early": 3,
+        "neuro-witness": 16
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "mruby/arvo_62822": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
         "benign_neuro_patch_2_witness_ap_5.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
         "benign_neuro_patch_4_witness_ap_5.bin",
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -2767,12 +3866,38 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
-        "benign_neuro_patch_6_witness_ap_5.bin"
-      ]
+        "benign_neuro_patch_6_witness_ap_5.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 27,
+        "neuro-early": 3,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_3"
+    },
+    "mupdf/arvo_5492": {
+      "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1
+      }
     },
     "net-snmp/arvo_36908": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -2783,6 +3908,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -2806,6 +3932,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -2817,12 +3944,28 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 3,
+        "neuro-witness": 45,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "net-snmp/arvo_40508": {
-      "subset": "subset_cyberGym_151_3",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
@@ -2834,16 +3977,29 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
-        "benign_neuro_patch_6_witness_cp_3.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_3.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 3,
+        "neuro-witness": 16,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_3"
     },
     "opensc/arvo_18798": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -2875,6 +4031,7 @@
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -2891,6 +4048,7 @@
         "benign_neuro_patch_5_witness_cp_1.bin",
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
         "benign_neuro_patch_6_witness_cp_1.bin",
@@ -2900,14 +4058,33 @@
         "benign_neuro_patch_ref_witness_ap_6.bin",
         "benign_neuro_patch_ref_witness_cp_1.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 57,
+        "neuro-early": 2,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_23215": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
@@ -2916,6 +4093,7 @@
         "benign_neuro_patch_2_witness_cp_1.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -2928,6 +4106,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
@@ -2936,12 +4115,27 @@
         "benign_neuro_patch_4_witness_cp_1.bin",
         "benign_neuro_patch_4_witness_cp_3.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
-        "benign_neuro_patch_4_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 4,
+        "neuro-witness": 31,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_24183": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -2983,6 +4177,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -3009,12 +4204,26 @@
         "benign_neuro_patch_ref_witness_ap_4.bin",
         "benign_neuro_patch_ref_witness_ap_5.bin",
         "benign_neuro_patch_ref_witness_ap_6.bin",
-        "benign_neuro_patch_ref_witness_cp_3.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_3.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 2,
+        "neuro-witness": 68,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_25943": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
@@ -3024,6 +4233,7 @@
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -3036,6 +4246,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -3047,6 +4258,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -3079,11 +4291,24 @@
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
         "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "boundary": 3,
+        "neuro-early": 4,
+        "neuro-witness": 64
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_27480": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -3094,6 +4319,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_ap_5.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
@@ -3138,12 +4364,31 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 2,
+        "neuro-witness": 55,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_27719": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -3156,6 +4401,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_ap_5.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
@@ -3164,12 +4410,14 @@
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
         "benign_neuro_patch_3_witness_ap_6.bin",
         "benign_neuro_patch_3_witness_cp_1.bin",
         "benign_neuro_patch_3_witness_cp_2.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -3188,16 +4436,36 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_5.bin",
         "benign_neuro_patch_6_witness_cp_1.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 5,
+        "neuro-witness": 49,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_28383": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -3210,6 +4478,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -3221,11 +4490,13 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
         "benign_neuro_patch_6_witness_ap_5.bin",
@@ -3243,12 +4514,31 @@
         "benign_neuro_patch_ref_witness_cp_2.bin",
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 4,
+        "neuro-witness": 46,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_30800": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -3260,11 +4550,13 @@
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
@@ -3274,6 +4566,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_ap_5.bin",
@@ -3289,6 +4582,7 @@
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_6.bin",
@@ -3301,12 +4595,28 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 5,
+        "neuro-witness": 53,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_32807": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
@@ -3341,6 +4651,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_6.bin",
@@ -3361,12 +4672,29 @@
         "benign_neuro_patch_ref_witness_cp_1.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "boundary": 4,
+        "neuro-witness": 55,
+        "neuro-early": 1,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_45552": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -3378,18 +4706,30 @@
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_cp_3.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 2,
+        "neuro-witness": 13
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_46653": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
         "benign_neuro_patch_1_witness_cp_1.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
         "benign_neuro_patch_3_witness_ap_5.bin",
@@ -3400,11 +4740,21 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 2,
+        "neuro-witness": 15
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_46852": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -3428,6 +4778,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -3457,12 +4808,26 @@
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_cp_2.bin",
-        "benign_neuro_patch_5_witness_cp_3.bin"
-      ]
+        "benign_neuro_patch_5_witness_cp_3.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "boundary": 3,
+        "neuro-early": 2,
+        "neuro-witness": 53,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_53536": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
@@ -3480,6 +4845,7 @@
         "benign_neuro_patch_4_witness_ap_5.bin",
         "benign_neuro_patch_4_witness_cp_1.bin",
         "benign_neuro_patch_4_witness_cp_4.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -3491,11 +4857,24 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_6_witness_cp_3.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "boundary": 4,
+        "neuro-early": 2,
+        "neuro-witness": 28
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_53927": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_cp_1.bin",
         "benign_neuro_patch_1_witness_cp_2.bin",
@@ -3522,9 +4901,11 @@
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_cp_1.bin",
         "benign_neuro_patch_4_witness_cp_3.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -3538,20 +4919,48 @@
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
         "benign_neuro_patch_ref_witness_ap_2.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 3,
+        "neuro-witness": 42
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_60672": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_cp_2.bin",
-        "benign_neuro_patch_3_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_3_witness_cp_5.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 3,
+        "neuro-early": 1,
+        "neuro-witness": 4,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_61797": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -3564,12 +4973,28 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
-        "benign_neuro_patch_ref_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_5.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "boundary": 4,
+        "neuro-witness": 13,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/arvo_64898": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -3612,11 +5037,22 @@
         "benign_neuro_patch_ref_witness_cp_1.bin",
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin"
-      ]
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 1,
+        "neuro-witness": 42
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensc/oss-fuzz_42537670": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_cp_1.bin",
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
@@ -3629,12 +5065,22 @@
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
-        "benign_neuro_patch_2_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_2_witness_cp_5.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 13,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensips/arvo_53080": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -3652,6 +5098,7 @@
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_4.bin",
@@ -3669,6 +5116,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -3678,6 +5126,7 @@
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -3695,11 +5144,19 @@
         "benign_neuro_patch_ref_witness_cp_2.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 4,
+        "neuro-witness": 60
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "opensips/arvo_53199": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_cp_1.bin",
@@ -3713,6 +5170,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_6.bin",
         "benign_neuro_patch_6_witness_cp_1.bin",
         "benign_neuro_patch_6_witness_cp_2.bin",
@@ -3725,11 +5183,24 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 25,
+        "neuro-early": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "readstat/oss-fuzz_420198855": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
@@ -3740,9 +5211,11 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
         "benign_neuro_patch_2_witness_ap_5.bin",
         "benign_neuro_patch_2_witness_ap_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_5.bin",
         "benign_neuro_patch_3_witness_cp_1.bin",
@@ -3750,6 +5223,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
@@ -3761,19 +5235,37 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_6.bin",
         "benign_neuro_patch_5_witness_cp_2.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
         "benign_neuro_patch_6_witness_ap_4.bin",
-        "benign_neuro_patch_6_witness_ap_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_ap_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 6,
+        "neuro-witness": 39,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "skcms/arvo_6521": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -3786,6 +5278,7 @@
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
         "benign_neuro_patch_1_witness_cp_6.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -3798,6 +5291,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -3809,18 +5303,30 @@
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
-        "benign_neuro_patch_5_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-early": 3,
+        "neuro-witness": 36,
+        "mutation-patch-aware": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "tinysparql/oss-fuzz_396460492": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
         "benign_neuro_patch_1_witness_ap_6.bin",
         "benign_neuro_patch_1_witness_cp_2.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_1.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
@@ -3833,6 +5339,7 @@
         "benign_neuro_patch_2_witness_cp_4.bin",
         "benign_neuro_patch_2_witness_cp_5.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_1.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
@@ -3841,6 +5348,7 @@
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
         "benign_neuro_patch_3_witness_cp_6.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -3869,12 +5377,27 @@
         "benign_neuro_patch_6_witness_ap_6.bin",
         "benign_neuro_patch_6_witness_cp_1.bin",
         "benign_neuro_patch_6_witness_cp_2.bin",
-        "benign_neuro_patch_6_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_5.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 4,
+        "neuro-witness": 55,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "util-linux/arvo_55282": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -3887,6 +5410,7 @@
         "benign_neuro_patch_1_witness_cp_6.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
         "benign_neuro_patch_2_witness_ap_4.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
@@ -3899,6 +5423,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_6.bin",
         "benign_neuro_patch_6_witness_ap_1.bin",
         "benign_neuro_patch_6_witness_ap_2.bin",
         "benign_neuro_patch_6_witness_ap_3.bin",
@@ -3910,12 +5435,22 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_poc_boundary_p1.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 5,
+        "neuro-early": 3,
+        "neuro-witness": 36
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "wamr/oss-fuzz_404921047": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -3927,11 +5462,22 @@
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
         "benign_neuro_patch_5_witness_cp_6.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 1,
+        "neuro-witness": 11
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "wireshark/arvo_1236": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
         "benign_neuro_patch_1_witness_ap_4.bin",
@@ -3959,6 +5505,7 @@
         "benign_neuro_patch_3_witness_cp_3.bin",
         "benign_neuro_patch_3_witness_cp_4.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
@@ -3970,6 +5517,7 @@
         "benign_neuro_patch_4_witness_cp_4.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
         "benign_neuro_patch_5_witness_ap_5.bin",
@@ -3992,28 +5540,65 @@
         "benign_neuro_patch_ref_witness_ap_2.bin",
         "benign_neuro_patch_ref_witness_ap_4.bin",
         "benign_neuro_patch_ref_witness_cp_2.bin",
-        "benign_neuro_patch_ref_witness_cp_3.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_3.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 61,
+        "neuro-early": 2,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_4"
+    },
+    "wireshark/arvo_1268": {
+      "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "mutation-patch-blind": 1
+      }
     },
     "wireshark/arvo_3408": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_ref_witness_ap_2.bin",
         "benign_neuro_patch_ref_witness_cp_2.bin",
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin"
-      ]
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 4
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "yara/arvo_11945": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_2_witness_cp_2.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_2.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_ap_4.bin",
         "benign_neuro_patch_4_witness_ap_5.bin",
         "benign_neuro_patch_4_witness_ap_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_ap_2.bin",
         "benign_neuro_patch_5_witness_ap_3.bin",
@@ -4025,17 +5610,33 @@
         "benign_neuro_patch_5_witness_cp_3.bin",
         "benign_neuro_patch_5_witness_cp_4.bin",
         "benign_neuro_patch_5_witness_cp_5.bin",
-        "benign_neuro_patch_5_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_5_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 19,
+        "neuro-early": 2,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "yara/arvo_13956": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_5.bin",
         "benign_neuro_patch_1_witness_cp_3.bin",
         "benign_neuro_patch_1_witness_cp_4.bin",
         "benign_neuro_patch_1_witness_cp_5.bin",
+        "benign_neuro_patch_2.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_2_witness_ap_3.bin",
         "benign_neuro_patch_2_witness_ap_5.bin",
@@ -4044,6 +5645,7 @@
         "benign_neuro_patch_2_witness_cp_2.bin",
         "benign_neuro_patch_2_witness_cp_3.bin",
         "benign_neuro_patch_2_witness_cp_6.bin",
+        "benign_neuro_patch_3.bin",
         "benign_neuro_patch_3_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_ap_3.bin",
         "benign_neuro_patch_3_witness_ap_5.bin",
@@ -4065,31 +5667,63 @@
         "benign_neuro_patch_5_witness_ap_4.bin",
         "benign_neuro_patch_5_witness_ap_5.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
-        "benign_neuro_patch_5_witness_cp_5.bin"
-      ]
+        "benign_neuro_patch_5_witness_cp_5.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 35,
+        "neuro-early": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "yara/arvo_20800": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_boundary_poc0.bin",
+        "benign_boundary_poc1.bin",
+        "benign_boundary_poc2.bin",
+        "benign_boundary_poc3.bin",
         "benign_neuro_patch_2_witness_ap_2.bin",
         "benign_neuro_patch_3_witness_cp_5.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_1.bin",
         "benign_neuro_patch_4_witness_ap_6.bin",
         "benign_neuro_patch_4_witness_cp_1.bin",
         "benign_neuro_patch_4_witness_cp_2.bin",
-        "benign_neuro_patch_4_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "boundary": 4,
+        "neuro-witness": 7,
+        "neuro-early": 1,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "yara/arvo_3862": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
         "benign_neuro_patch_3_witness_cp_3.bin",
+        "benign_neuro_patch_4.bin",
         "benign_neuro_patch_4_witness_ap_3.bin",
         "benign_neuro_patch_4_witness_ap_6.bin",
         "benign_neuro_patch_4_witness_cp_1.bin",
         "benign_neuro_patch_4_witness_cp_2.bin",
         "benign_neuro_patch_4_witness_cp_5.bin",
         "benign_neuro_patch_4_witness_cp_6.bin",
+        "benign_neuro_patch_5.bin",
         "benign_neuro_patch_5_witness_ap_1.bin",
         "benign_neuro_patch_5_witness_cp_1.bin",
         "benign_neuro_patch_5_witness_cp_2.bin",
@@ -4101,12 +5735,24 @@
         "benign_neuro_patch_6_witness_cp_3.bin",
         "benign_neuro_patch_6_witness_cp_4.bin",
         "benign_neuro_patch_6_witness_cp_5.bin",
-        "benign_neuro_patch_6_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_6_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-witness": 19,
+        "neuro-early": 2,
+        "mutation-patch-aware": 2
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     },
     "yara/arvo_45161": {
-      "subset": "subset_cyberGym_151_4",
       "inputs": [
+        "agent_decoded_claude-opus-4.6.bin",
+        "agentic_poc_claude-opus-4.6.bin",
+        "benign_neuro_patch_1.bin",
         "benign_neuro_patch_1_witness_ap_1.bin",
         "benign_neuro_patch_1_witness_ap_2.bin",
         "benign_neuro_patch_1_witness_ap_3.bin",
@@ -4129,8 +5775,20 @@
         "benign_neuro_patch_ref_witness_cp_3.bin",
         "benign_neuro_patch_ref_witness_cp_4.bin",
         "benign_neuro_patch_ref_witness_cp_5.bin",
-        "benign_neuro_patch_ref_witness_cp_6.bin"
-      ]
+        "benign_neuro_patch_ref_witness_cp_6.bin",
+        "benign_patch_p0_poc1.bin",
+        "benign_patch_p0_poc2.bin",
+        "benign_poc1.bin"
+      ],
+      "kinds": {
+        "agent-decoded": 1,
+        "agentic": 1,
+        "neuro-early": 1,
+        "neuro-witness": 23,
+        "mutation-patch-aware": 2,
+        "mutation-patch-blind": 1
+      },
+      "witness_subset": "subset_cyberGym_151_4"
     }
   }
 }

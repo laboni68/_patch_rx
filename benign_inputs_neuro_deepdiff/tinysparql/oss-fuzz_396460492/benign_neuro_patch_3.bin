@@ -1,0 +1,4 @@
+@prefix ex: <http://example.org/> .
+<http://example.org/s> <http://example.org/p> "hello"^^<http://www.w3.org/2001/XMLSchema#string> .
+ex:s ex:p2 "plain" .
+# trailing comment

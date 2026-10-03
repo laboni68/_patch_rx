@@ -1,0 +1,6 @@
+a = "abcd".unpack("B4")[0]
+b = "abcd".unpack("b4")[0]
+c = "\xff\xff".unpack("B4")[0]
+p a, b, c
+raise "len" if a.size != 4 || b.size != 4 || c.size != 4
+p "\x01\x02".unpack("b4C1")

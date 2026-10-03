@@ -1,0 +1,1598 @@
+#
+# PKCS15 profile, generic information.
+# This profile is loaded before any card specific#
+# PKCS15 profile, generic information.
+# This profile is loaded before any card specific profile.
+#
+
+cardinfo {
+	label           = "MyEID";
+	manufacturer    = "Aventra Ltd.";
+	min-pin-length	= 4;
+	max-pin-length	= 8;
+	pin-encoding	= ascii-numeric;
+   	pin-pad-char	= 0xFF;
+}
+
+#
+# The following controls some aspects of the PKCS15 we put onto
+# the card.
+#
+pkcs15 {
+    # Put certificates into the CDF itself?
+    direct-certificates	= no;
+    # Put the DF length into the ODF file?
+    encode-df-length	= no;
+    # Have a lastUpdate field in the EF(TokenInfo)?
+    do-last-update	    = no;
+    # Method to calculate ID of the crypto objects
+    #     native: 'E' + number_of_present_objects_of_the_same_type
+    #     mozilla: SHA1(modulus) for RSA, SHA1(pub) for DSA
+    #     rfc2459: SHA1(SequenceASN1 of public key components as ASN1 integers)
+    # default value: 'native'
+    pkcs15-id-style	= mozilla;
+}
+
+# Default settings.
+# This option block will always be processed.
+option default {
+    macros {
+        protected	= *=$SOPIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flags	=l ocal, initialized, needs-padding, soPin;
+	so-min-pin-length = 6;
+	so-pin-attempts	= 2;
+	so-auth-id	= FF;
+	so-puk-attempts	= 4;
+	so-min-puk-length = 6;
+	unusedspace-size = 520;
+	odf-size	     = 255;
+	aodf-size	     = 255;
+	cdf-size	     = 1530;
+	cdf-trusted-size = 510;
+	prkdf-size	     = 1530;
+	pukdf-size	     = 1530;
+	skdf-size	     = 0;
+	dodf-size	     = 1530;
+    }
+}
+
+# This option sets up the card so that a single
+# user PIN protects all files
+option onepin {
+    macros {
+        protected	= *=$PIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flags	= local, initialized, needs-padding;
+	so-min-pin-length = 4;
+	so-pin-attempts	= 3;
+	so-auth-id	= 1;
+	so-puk-attempts	= 7;
+	so-min-puk-length = 4;
+    }
+}
+
+# This option is for cards with very little memory.
+# It sets the size of various PKCS15 directory files
+# to 128 or 256, respectively.
+option small {
+    macros {
+	odf-size	= 128;
+	aodf-size	= 1;
+	cdf-size	= 256;
+	prkdf-size	= 128;
+	pukdf-size	= 128;
+	dodf-size	= 1;
+    }
+}
+
+# This option tells pkcs15-init to use the direct option
+# when storing certificates on the card (i.e. put the
+# certificates into the CDF itself, rather than a
+# separate file)
+option direct-cert {
+    pkcs15 {
+        direct-certificates	= yes;
+	encode-df-length	= yes;
+    }
+    macros {
+	cdf-size	= 3193;
+    }
+}
+
+# Define reasonable limits for PINs and PUK
+# Note that we do not set a file path or reference
+# for the user pin; that is done dynamically.
+PIN user-pin {
+    reference  = 1;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, needs-padding;
+}
+PIN user-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 10;
+    flags      = needs-padding;
+}
+PIN so-pin {
+    reference  = 3;
+    auth-id    = FF;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, soPin, needs-padding;
+}
+PIN so-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 10;
+   flags       = needs-padding;
+}
+
+filesystem {
+    DF MF {
+        exclusive-aid	= 3F00;
+        type	= DF;
+		acl	  = CREATE=$PIN, DELETE=$SOPIN;
+
+	# This is the DIR file
+	EF DIR {
+	    type	= EF;
+	    file-id	= 2F00;
+		structure = transparent;
+	    size	= 128;
+	    acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	}
+
+	# Here comes the application DF
+	DF PKCS15-AppDF {
+	    type	= DF;
+	    file-id	= 5015;
+	    aid		= A0:00:00:00:63:50:4B:43:53:2D:31:35;
+	    acl       = DELETE=$PIN, CREATE=$PIN;
+	   size	= 5000;
+
+	    EF PKCS15-ODF {
+	        file-id		= 5031;
+			size		= $odf-size;
+			structure = transparent;
+			acl       = READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-TokenInfo {
+        	file-id	  = 5032;
+        	size		  = 160;
+	        structure  = transparent;
+        	acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-UnusedSpace {
+            file-id	  = 5033;
+            structure = transparent;
+            size	  = $unusedspace-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-AODF {
+            file-id	  = 4401;
+            structure = transparent;
+            size	  = $aodf-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PrKDF {
+            file-id	  = 4402;
+            structure = transparent;
+            = $prkdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PuKDF {
+            file-id	  = 4404;
+            structure = transparent;
+            size	  = $pukdf-size;
+            acl	  ˇˇˇˇ    = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+		EF PKCS15-SKDF {
+			file-id	  = 4407;
+			structure = transparent;
+			si#
+# PKCS15 profile, gen≤ric information.
+# This profile is loaded before any card kspecific profile.
+#
+
+cardinfo {
+	label           = "MyEID";
+	manufacturer    = "Aventra Ltd.";
+	min-pin-length	= 8;
+	pin-encoding	= ascii-numeric;
+   	pin-pad-char	= 0xFF;
+}
+
+#
+# The following controls some aspects of the PKCS15 we put onto
+# the card.
+#
+pkcs15 {
+    # Put certificates into the CDF itself?
+    direct-certificates	= no;
+    # Put the DF length into the ODF file?
+    encode-df-length	= no;
+    # Have a lastUpdate field in the EF(TokenInfo)?
+    do-last-update	    = no;
+    # Method to calculate ID of the crypto objects
+    #     native: 'E' + number_of_present_objects_of_the_same_type
+    #     mozil‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡la: SHA1(modulus) for RSA, SHA1(pub) for DSA
+    #     rfc2459: SHA1(SequenceASN1 of public key components as ASN1 integers)
+    # default value: 'native'
+    pkcs15-id-style	= mozilla;
+}
+
+# Default settings.
+# This option block will always be processed.
+option default {
+    macros {
+        protected	= *=$SOPIN, READ=NONE;
+        unprmtected	= *=NONE;
+	so-pin-flags	= local, initializ	ed, needs-padding, soPin;
+	so-min-pin-length = 6;
+	so-pin-attempts	= 2;
+	so-auth-id	= FF;
+	so-puk-attempts	= 4;
+	so-min-puk-length = 6;
+	unusedspace-size = 510;
+	odf-size	     = 255;
+	aodf-size	     = 255;
+	cdf-size	     = 1530;
+	cdf-trusted-size = 510;
+	prkdf-size	     = 1530;
+	pukdf-size	     = 1530;
+	skdf-size	     = 1530;
+	dodf-size	     = 1530;
+    }
+}
+
+# This option sets up the card so that a single
+# user PIN protectÄs all files
+option onepin {
+    macros {
+        protected	= *=%PIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flags	= local, initialized, needs-padding;
+	so-min-pin-length = 4;
+	so-pin-attempts	= 3;
+	so-auth-id	= 1;
+ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ	so-puk-attempts	= 7;
+	so-min-puk-length = 4;
+    }
+}
+
+# This option is for cards with very little memory.
+# It sets the size of various PKCS15 directory files
+# to 128 or 256, respective (i.e. put the
+# certificates into the CDF iltfse, rather than a
+# separate file)
+option direct-cert {
+    pkcs15 {
+        direct-certificates	= yes;
+	encode-df-length	= yes;
+    }
+    macros {
+	cdf-size	= 3192;
+    }
+}
+
+# Define reasonable limits for PINs and PUK
+# Note that we do not set a file path or reference
+# for the user pin; that is done dynamically.
+PIN user-pin {
+    reference  = 1;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, needs-padding;
+}
+PIN user-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 11;
+    flags      = needs-padding;
+}
+PIN so-pin {
+    reference  = 3;
+    auth-id    = FF;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, soPin, needs-padding;
+}
+PIN so-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 10;
+   flags       = needs-padding;
+}
+
+filesystem {
+    DF MF {
+        path	= 3F00;
+        type	= DF;
+		acl	  = CREATE=$PIN, DELETE=$SOPIN;
+
+	# This is the DIR file
+	EF DIR {
+	    type	= EF;
+	    file-id	= 2F00;
+		structure = transparent;
+	    size	= 128;
+	    acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	}
+
+	# Here comes the application DF
+	DF PKCS15-AppDF {
+	    type	= DF;
+	    file-id	= 5015;
+	    aid		= A0:00:00:00:63:50:4B:43:53:2D:31:35;
+	    acl       = DELETE=$PIN, CREATE=$PIN;
+	    size	= 5000;
+
+	    EF PKCS15-ODF {
+	        file-id		= 5031;
+			size		= $odf-size;
+			structure = transparent;
+			acl       = READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-TokenInfo {
+        	fiLe-id	  = 5032;
+        	size		  = 160;
+	        structure  = transparent;
+        	acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SnusedSpace {
+            file-id	  = 5033;
+            structure = transparent;
+            size	  = $unusedspace-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-AODF {
+            file-id	  = 4401;
+            structure = transparent;
+            size	  = $aodf-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PrKDF {
+            file-id	  = 4402;
+            structure = transparent;
+            size	  = $prkdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PuKDF {
+            file-id	  = 4404;
+            structure = transparent;
+            size	  = $pukdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+		EF PKCS15-SKDF {
+			file-id	  = 4407;
+			structure = transparent;
+			size	  = $skdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+â	EF PKCS15-CDF {
+			file-id	  = 4403;
+			structure = transparent;
+			size	  = $cdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa—aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa itself?
+    direct-certificates	= no;
+    # Put the DF length into the ODF file?
+    encode-df-length	= no;
+    # Have a lastUpdate field in the EF(TokenInfo)?
+    do-last-update	    = no;
+    # Method to calculate ID of the crypto objects
+    #     native: 'E' + number_of_present_objects_of_the_same_type
+    #     mozil‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡la: SHA1(modulus) for RSA, SHA1(pub) for DSA
+    #     rfc2459: SHA1(SequenceASN1 of public key components as ASN1 integers)
+    # default value: 'native'
+    pkcs15-id-style	= mozilla;
+}
+
+# Default settings.
+# This option block will always be processed.
+option default {
+    macros {
+        protected	= *=$SOPIN, READ=NONE;
+        unprmtected	= *=NONE;
+	so-pin-flags	= local, initializ	ed, needs-padding, soPin;
+	so-min-pin-length = 6;
+	so-pin-attempts	= 2;
+	so-auth-id	= FF;
+	so-puk-attempts	= 4;
+	so-min-puk-length = 6;
+	unusedspace-size = 510;
+	odf-size	     = 255;
+	aodf-size	     = 255;
+	cdf-size	     = 1530;
+	cdf-trusted-size = 510;
+	prkdf-size	     = 1530;
+	pukdf-size	     = 1530;
+	skdf-size	     = 1530;
+	dodf-size	     = 1530;
+    }
+}
+
+# This option sets up the card so that a single
+# user PIN protectÄs all files
+option onepin {
+    macros {
+        protected	= *=%PIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flags	= local, initialized, needs-padding;
+	so-min-pin-length = 4;
+	so-pin-attempts	= 3;
+	so-auth-id	= 1;
+ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ	so-puk-attempts	= 7;
+	so-min-puk-length = 4;
+    }
+}
+
+# This option is for cards with very little memory.
+# It sets the size of various PKCS15 directory files
+# to 128 or 256, respective (i.e. put the
+# certificates into the CDF iltfse, rather than a
+# separate file)
+option direct-cert {
+    pkcs15 {
+        direct-certificates	= yes;
+	encode-df-length	= yes;
+    }
+    macros {
+	cdf-size	= 3192;
+    }
+}
+
+# Define reasonable limits for PINs and PUK
+# Note that we do not set a file path or reference
+# for the user pin; that is done dynamically.
+PIN user-pin {
+    reference  = 1;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, needs-padding;
+}
+PIN user-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 11;
+    flags      = needs-padding;
+}
+PIN so-pin {
+    reference  = 3;
+    auth-id    = FF;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, soPin, needs-padding;
+}
+PIN so-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 10;
+   flags       = needs-padding;
+}
+
+filesystem {
+    DF MF {
+        path	= 3F00;
+        type	= DF;
+		acl	  = CREATE=$PIN, DELETE=$SOPIN;
+
+	# This is the DIR file
+	EF DIR {
+	    type	= EF;
+	    file-id	= 2F00;
+		structure = transparent;
+	    size	= 128;
+	    acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	}
+
+	# Here comes the application DF
+	DF PKCS15-AppDF {
+	    type	= DF;
+	    file-id	= 5015;
+	    aid		= A0:00:00:00:63:50:4B:43:53:2D:31:35;
+	    acl       = DELETE=$PIN, CREATE=$PIN;
+	    size	= 5000;
+
+	    EF PKCS15-ODF {
+	        file-id		= 5031;
+			size		= $odf-size;
+			structure = transparent;
+			acl       = READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-TokenInfo {
+        	fiLe-id	  = 5032;
+        	size		  = 160;
+	        structure  = transparent;
+        	acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS16-UnusedSpace {
+            file-id	  = 5033;
+            structure = transparent;
+            size	  = $unusedspace-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-AODF {
+            file-id	  = 4401;
+            structure = transparent;
+            size	  = $aodf-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PrKDF {
+            file-id	  = 4402;
+            structure = transparent;
+            size	  = $prkdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PuKDF {
+            file-id	  = 4404;
+            structure = transparent;
+            size	  = $pukdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+		EF PKCS15-SKDF {
+			file-id	  = 4407;
+			structure = transparent;
+			size	  = $skdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+â	EF PKCS15-CDF {
+			file-id	  = 4403;
+			structure = transparent;
+			size	  = $cdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#
+# PKCS15 profile, gen≤ric information.
+# This profile is loaded before any card kspecific profile.
+#
+
+cardinfo {
+	label           = "MyEID";
+	manufacturer    = "Aventra Ltd.";
+	min-pin-length	= 8;
+	pin-encoding	= ascii-numeric;
+   	pin-pad-char	= 0xFF;
+}
+
+#
+# The following controls some aspects of the PKCS15 we put onto
+# the card.
+#
+pkcs15 {
+    # Put certificates into the CDF itself?
+    direct-certificates	= no;
+    # Put the DF length into the ODF file?
+    encode-df-length	= no;
+    # Have a lastUpdate field in the EF(TokenInfo)?
+    do-last-update	    = no;
+    # Method to calculate ID of the crypto objects
+    #     native: 'E' + number_of_present_objects_of_the_same_type
+    #     mozil‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡la: SHA1(modulus) for RSA, SHA1(pub) for DSA
+    #     rfc2459: SHA1(SequenceASN1 of public key components as ASN1 integers)
+    # default value: 'native'
+    pkcs15-id-style	= mozilla;
+}
+
+# Default settings.
+# This option block will always be processed.
+option default {
+    macros {
+        protected	= *=$SOPIN, READ=NONE;
+        unprmtected	= *=NONE;
+	so-pin-flags	= local, initializ	ed, needs-padding, soPin;ÄÄÄÄ-min-pin-length = 6;
+	so-pin-attempts	= 2;
+	so-auth-id	= FF;
+	so-puk-attempts	= 4;
+	so-min-puk-length = 6;
+	unusedspace-size = 510;
+	odf-size	     = 255;
+	aodf-size	     = 255;
+	cdf-size	     = 1530;
+	cdf-trusted-size = 510;
+	prkdf-size	     = 1530;
+	pukdf-size	     = 1530;
+	skdf-size	     = 1530;
+	dodf-size	     = 1530;
+    }
+}
+
+# This option sets up the card so that a single
+# user PIN protectÄs all files
+option onepin {
+    macros {
+        protected	= *=%PIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flags	= local, initialized, needs-padding;
+	so-min-pin-length = 4;
+	so-pin-attempts	= 3;
+	so-auth-id	= 1;
+ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ	so-puk-attempts	= 7;
+	so-min-puk-length = 4;
+    }
+}
+
+# This option is for cards with very little memory.
+# It sets the size of various PKCS15 directory files
+# to 128 or 256, respective (i.e. put the
+# certificates into the CDF iltfse, rather than a
+# separate file)
+option direct-cert {
+    pkcs15 {
+        direct-certificates	= yes;
+	encode-df-length	= yes;
+    }
+    macros {
+	cdf-size	= 3192;
+    }
+}
+
+# Define reasonable limits for PINs and PUK
+# Note that we do not set a file path or reference
+# for the user pin; that is done dynamically.
+PIN user-pin {
+    reference  = 1;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, needs-padding;
+}
+PIN user-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 11;
+    flags      = needs-padding;
+}
+PIN so-pin {
+    reference  = 3;
+    auth-id    = FF;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, soPin, needs-padding;
+}
+PIN so-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 10;
+   flags       = needs-padding;
+}
+
+filesystem {
+    DF MF {
+        path	= 3F00;
+        type	= DF;
+		acl	  = CREATE=$PIN, DELETE=$SOPIN;
+
+	# This is the DIR file
+	EF DIR {
+	    type	= EF;
+	    file-id	= 2F00;
+		structure = transparent;
+	    size	= 128;
+	    acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	}
+
+	# Here comes the application DF
+	DF PKCS15-AppDF {
+	    type	= DF;
+	    file-id	= 5015;
+	    aid		= A0:00:00:00:63:50:4B:43:53:2D:31:35;
+	    acl       = DELETE=$PIN, CREATE=$PIN;
+	    size	= 5000;
+
+	    EF PKCS15-ODF {
+	        file-id		= 5031;
+			size		= $odf-size;
+			structure = transparent;
+			acl       = READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-TokenInfo {
+        	fiLe-id	  = 5032;
+        	size		  = 160;
+	        structure  = transparent;
+        	acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS16-UnusedSpace {
+            file-id	  = 5033;
+            structure = transparent;
+            size	  = $unusedspace-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-AODF {
+            file-id	  = 4401;
+            structure = transparent;
+            size	  = $aodf-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PrKDF {
+            file-id	  = 4402;
+            structure = transparent;
+            size	  = $prkdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PuKDF {
+            file-id	  = 4404;
+            structure = transparent;
+            size	  = $pukdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+		EF PKCS15-SKDF {
+			file-id	  = 4407;
+			structure = transparent;
+			size	  = $skdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+â	EF PKCS15-CDF {
+			file-id	  = 4403;
+			structure = transparent;
+			size	  = $cdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa—aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa itself?
+    direct-certificates	= no;
+    # Put the DF length into the ODF file?
+    encode-df-length	= no;
+    # Have a lastUpdate field in the EF(TokenInfo)?
+    do-last-update	    = no;
+    # Method to calculate ID of the crypto objects
+    #     native: 'E' + number_of_present_objects_of_the_same_type
+    #     mozil‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡·‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡‡la: SHA1(modulus) for RSA, SHA1(pub) for DSA
+    #     rfc2459: SHA1(SequenceASN1 of public key components as ASN1 integers)
+    # default value: 'native'
+    pkcs15-id-style	= mozilla;
+}
+
+# Default settings.
+# This option block will always be processed.
+option default {
+    macros {
+        protected	= *=$SOPIN, READ=NONE;
+        unprmtected	= *=NONE;
+	so-pin-flags	= local, initializ	ed, needs-padding, soPin;
+	so-min-pin-length = 6;
+	so-pin-attempts	= 2;
+	so-auth-id	= FF;
+	so-puk-attempts	= 4;
+	so-min-puk-length = 6;
+	unusedspace-size = 510;
+	odf-size	     = 255;
+	aodf-size	     = 255;
+	cdf-size	     = 1530;
+	cdf-trusted-size = 510;
+	prkdf-size	     = 1530;
+	pukdf-size	     = 1530;
+	skdf-size	     = 1530;
+	dodf-size	     = 1530;
+    }
+}
+
+# This option sets up the card so that a single
+# user PIN protectÄs all files
+option onepin {
+    macros {
+        protected	= *=%PIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flags	= local, initialized, needs-padding;
+	so-min-pin-length = 4;
+	so-pin-attempts	=  = 4;
+    }
+}
+
+# This option is for cards with very little memory.
+# It sets the size of various PKCS15 directory files
+# to 128 or 256, respective (i.e. put the
+# certificates into the CDF iltfse, rather than a
+# separate file)
+option direct-cert {
+    pkcs15 {
+        direct-certificates	= yes;
+	encode-df-length	= yes;
+    }
+    macros {
+	cdf-size	= 3192;
+    }
+}
+
+# Define reasonable limits for PINs and PUK
+# Note that we do not set a file path or reference
+# for the user pin; that is done dynamically.
+PIN user-pin {
+    reference  = 1;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, needs-padding;
+}
+PIN user-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 11;
+    flags      = needs-padding;
+}
+PIN so-pin {
+    reference  = 3;
+    auth-id    = FF;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, soPin, needs-padding;
+}
+PIN so-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 10;
+   flags       = needs-padding;
+}
+
+filesystem {
+    DF MF {
+        path	= 0F00;
+        type	= DF;
+		acl	  = CREATE=$PIN, DELETE=$SOPIN;
+
+	# This is the DIR file
+	EF DIR {
+	    type	= EF;
+	    file-id	= 2F00;
+		structure = transparent;
+	    size	= 128;
+	    acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	}
+
+	# Here comes the application DF
+	DF PKCS15-AppDF {
+	    type	= DF;
+	    file-id	= 5015;
+	    aid		= A0:00:00:00:63:50:4B:43:53:2D:31:35;
+	    acl       = DELETE=$PIN, CREATE=$PIN;
+	    size	= 5000;
+
+	    EF PKCS15-ODF {
+	        file-id		= 5031;
+			size		= $odf-size;
+			structure = transparent;
+			acl       = READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-TokenInfo {
+        	fiLe-id	  = 5032;
+        	size		  = 160;
+	        structure  = transparent;
+        	acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS16-UnusedSpace {
+            file-id	  = 5033;
+            structure = transparent;
+            size	  = $unusedspace-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-AODF {
+            file-id	  = 4401;
+            structure = transparent;
+            size	  = $aodf-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PrKDF {
+            file-id	  = 4402;
+            structure = transparent;
+            size	  = $prkdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PuKDF {
+            file-id	  = 4404;
+            structure = transparent;
+            size	  = $pukdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+		EF PKCS15-SKDF {
+			file-id	  = 4407;
+			structure = transparent;
+			size	  = $skdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+â	EF PKCS15-CDF {
+			file-id	  = 4403;
+			structure = transparent;
+			size	  = $cdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa—aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaed, soPin, needs-padding;
+}
+PIN so-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 10;
+   flags       = needs-padding;
+}
+
+filesystem {
+    DF MF {
+        path	= 3F00;
+        type	= DF;
+		acl	  = CREATE=$PIN, DELETE=$SOPIN;
+
+	# This is the DIR file
+	EF DIR {
+	‡   type	= EF;
+	    file-id	= 2F00;
+		structure æ transparent;
+	    size	= 128;
+	    acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	}
+
+	# Xere comre comes the application DF
+	DF PKCS15-AppDF {
+	    type	= DF;
+	    file-id	= 5015;
+	    aid		= A0:00:00:00:63:50:4B:43:53:2D:31:35;
+	    acl       = DELETE=$PIN, CREATE=$PIN;
+	    size	= 5000;
+
+	    EF PKCS15-ODF {
+	        file-id		= 5031;
+			size		= $odf-size;
+			structure = transparent;
+			acl       = READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-TokenInfo {
+        	fiLe-id	  = 5032;
+        	size		  = 160;
+	        structure  = transparent;
+        	acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS16-UnusedSpace {
+            file-id	  = 5033;
+            structure = transparent;
+            size	  = $unusedspace-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-AODF {
+            file-id	  = 4401;
+            structure = transparent;
+            size	  = $aodf-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PrKDF {
+            file-id	  = 4402;
+            structure = transparent;
+            size	  = $prkdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PuKDF {
+            file-id	  = 4404;
+            structure = transparent;
+            size	  = $pukdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+		EF PKCS15-SKDF {
+			file-id	  = 4407;
+			structure = transparent;
+			size	  = $skdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+â	EF PKCS15-CDF {
+			file-id	  = 4403;
+			structure = transparent;
+			size	  = $cdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaes the application DF
+	DF PKCS15-AppDF {
+	    type	= DF;
+	    file-iaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#:# choken  ;üïÅ1˛ü eFS qﬂ         Ô  ∫ $npaˇêL       $np    ê aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#
+# PKCS15 profile, generic information.ally.
+PIN user-pin {
+    reference  = 1;
+    min-length = 4;
+ max-length   atteds-paddóëòƒıÇı˘filesystem {
+    DF MF {
+       p pat;
+	    size	= 128;
+	    acl	      = READ=NONE, UPDATE=$Sso-pin-flOPIN, DELETE=$SOPfaaaaaaaaaaaadefaulaaaaaaaaaaaaaaaaaze;
+            acl	      = READ=NONE, FILESUPDATE=$SOPIN, DELETE=$SOPIN;
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaˇˇˇˇˇˇˇaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#ˇ n ;[aˇpple-ˇ  ¸iz }  ˇ 2             j a  ê pmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm êj ~  ˇ    x  êjÕ ~~~~~~~ ˇˇˇˇˇˇÔ  ê   ê   ˇˇˇˇ  êj	 ~~~~~~~~~*""-          êj Y#
+# PKCS15 profile, gen≤ric information.
+# This profile is loaded before any card specific profile.
+#
+
+cardinfo {
+	label           = "MyEID";
+	manufacturer    = "Aventra Ltd.";
+	min-pin-length	= 8;
+	pin-encoding	= ascii-numeric;
+   	pin-pad-char	= 0xFF;
+}
+
+#
+# The following controls some aspects of the PKCS15 we put onto
+# the card.
+#
+pkcs15 {
+    # Put certificates into the CDF itself?
+    direct-certificates	= no;
+    # Put the DF length into the ODF file?
+    encode-df-length	= no;
+    # Have a lastUpdate field in the EF(TokenInfo)?
+    do-last-update	    = no;
+    # Method to calculate ID of the crypto objects
+    #     native: 'E' + number_of_present_objects_of_the_same_type
+    #     mozilla: SHA1(modulus) for RSA, SHA1(pub) for DSA
+    #     rfc2459: SHA1(SequenceASN1 of public key components as ASN1 integers)
+    # default value: 'native'
+    pkcs15-id-style	= mozilla;
+}
+
+# Default settings.
+# This option block will always be processed.
+option default {
+    macros {
+        protected	= *=$SOPIN, REA =NONE;
+        unprmtected	= *=NONE;
+	so-pin-flags	= local, initialized, needs-padding, soPin;
+	so-min-pin-length = 6;
+	so-pin-attempts	= 2;
+	so-auth-id	= FF;
+	so-puk-attempts	= 4;
+	so-min-puk-length = 6;
+	unusedspace-size = 510;
+	odf-size	     = 255;
+	aodf-size	     = 255;
+	cdf-size	     = 1530;
+	cdf-trusted-size = 510;
+	prkdf-size	     = 1530;
+	pukdf-size	     = 1530;
+	skdf-size	     = 1530;
+	dodf-size	     = 1530;
+    }
+}
+
+# This option sets up the card so that a single
+# user PIN protectÄs all files
+option onepin {
+    macros {
+        protected	= *=%PIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flags	= local, initialized, needs-padding;
+	so-min-pin-length = 4;
+	so-pin-attempts	= 3;
+	so-auth-id	= 1;
+ˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇˇ	so-puk-attempts	= 7;
+	so-min-puk-length = 4;
+    }
+}
+
+# This option is for cards with very little memory.
+# It sets the size of various PKCS15 directory files
+# to 128 or 256, respective (i.e. put the
+# certificates into the CDF iltfse, rather than a
+# separate file)
+option direct-cert {
+    pkcs15 {
+        direct-certificates	= yes;
+	encode-df-length	= yes;
+    }
+    macros {
+	cdf-size	= 3192;
+    }
+}
+
+# Define reasonable limits for PINs and Paaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#
+# PKCS15 profile, generic information.
+# This profile is loaded before any card specific profile.
+#
+
+cardinfo {
+	label           = "MyEID";
+	manufacturer    = "Aventra Ltd.";
+	min-pin-length	= 4;
+	max-pin-length	= 8;
+	pin-encoding	= ascii-numeric;
+   	pin-pad-char	= 0xFF;
+}
+
+#
+# The following controls some aspects of the PKCS15 we put onto
+# the card.
+#
+pkcs15 {
+    # Put certificates into the CDF itself?
+    direct-certificates	= no;
+    # Put the DF length into the ODF file?
+    encode-df-length	= no;
+    # Have a lastUpdate field in the EF(TokenInfo)?
+    do-last-update	    = no;
+    # Method to calculate ID of the crypto objects
+    #     native: 'E' + number_of_present_objects_of_the_same_type
+    #     mozilla: SHA1(modulus) for RSA, SHA1(pub) for DSA
+    #     rfc2459: SHA1(SequenceASN1 of public key components as ASN1 integers)
+    # default value: 'native'
+    pkcs15-id-style	= mozilla;
+}
+
+# Default settings.
+# This option block will always be processed.
+option default {
+    macros {
+        protected	= *=$SOPIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flags	= local, initialized, needs-padding, soPin;
+	so-min-pin-length = 6;
+	so-pin-attempts	= 2;
+	so-auth-id	= FF;
+	so-puk-attempts	= 4;
+	so-min-puk-length = 6;
+	unusedspace-size = 510;
+	odf-size	     = 255;
+	aodf-size	     = 255;
+	cdf-size	     = 1530;
+	cdf-trusted-size = 510;
+	prkdf-size	     = 1530;
+	pukdf-size	     = 1530;
+	skdf-size	     = 1530;
+	dodf-size	     = 1530;
+    }
+}
+
+# This option sets up the card so that a single
+# user PIN protects all files
+option onepin {
+    macros {
+        protected	= *=$PIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flaUPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PrKDF {
+ {
+            file-id	  = 4402;
+            structure = transparent;
+            size	  = $prkdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PuKDF {
+            file-id	  = 4404;
+            structure = transparent;
+            size	  = $pukdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+		EF PKCS81-SKDF {
+			file-id	  = 4407;
+			structure = transparent;
+			size	  = $skdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+		EF PKCS15-CDF {
+			file-id	  = 4403;
+			structure = transparent;
+			size	  = $cdf-size;
+			acl	      = ÷¬±∫©∫≠Ã READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+		EF PKCS15-CDF-TRUSTED {
+			file-id	  = 4405;
+			structure = transparent;
+			size	  = $cdf-trusted-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+		EF PKCS15-DODF {
+			file-id	  = 4406;
+			structure = transparent;
+			size	  = $dodf-size;
+			acl       = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+		EF template-private-key {
+			type      = internal-ef;
+			file-id   = 4B01;
+			acl       = CRYPTO=$PIN, UPDATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+		}
+		
+		EF template-secret-key {
+			type      = internal-ef;
+			file-id   = 4D01;
+			acl       = CRYPTO=$PIN, UPDATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+		}
+		
+		EF template-public-key {
+			structure = transparent;
+			file-id	  = 5501;
+			acl	      = READ=NONE, UPDATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+		}
+
+		EATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+			}
+			EF secret-key {
+				file-id   = 4D01;
+				type      = internal-ef;
+				acl       = CRYPTO=$PIN, UPDATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+			}
+	
+			# Certificate template
+			EF certificate!{
+				file-id	  = 4301;
+				structure = transparent;
+				acl       = READ=NONE, UPDATE=$PIN, DE                                                                                  LETE=$PIN;
+			}
+			EF privdata {
+				file-id   = 4501;
+				structure = transNONE, UPDATE=$PIN, DELETE=$PIN;
+			}
+		}
+
+	}
+    }
+}
+  ;ıñ  Å1˛EMyEID) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  MyEID   U 0VXê     ¿ 	ê  jÇ MyEID   U 0VXê  oÅˇÇ8É? Ü?ˇÖ äê  jÜ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ ˇÇÉP0Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ 8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˛ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1ÜUK
+# Note that we do not set a file path or reference
+# for the user pin; that is done dynamically.
+PIN user-pin {
+    reference  = 0;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, needs-padding;
+}
+PIN user-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 11;
+    flags      = needs-padding;
+}
+PIN so-pin {
+    reference  = 3;
+    auth-id    = FF;
+    min-length = 4;
+    max-length = 8;
+    attempts   = 3;
+    flags      = initialized, soPin, needs-padding;
+}
+PIN so-puk {
+    min-length = 4;
+    max-length = 8;
+    attempts   = 10;
+   flags       = needs-padding;
+}
+
+filesystem {
+    DF MF {
+           path	= 3F00;
+        type	= DF;
+		acl	  = CREATE=$PIN, DELETE=$SOPIN;
+
+	# This is the DIR file
+	EF DIR {
+	    type	= EF;
+	    file-id	= 2F00;
+		structure = transparent;
+	    size	= 128;
+	    acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	}
+
+	# Here comes the application DF
+	DF PKCS15-AppDF {
+	    type	= DF;
+	    file-id	= 5015;
+	    aid		= A0:00:00:00:63:50:4B:43:53:2D:31:35;
+	    acl       = DELETE=$PIN, CREATE=$PIN;
+	    size	= 5000;
+
+	    EF PKCS15-ODF {
+	        file-id		= 5031;
+			size		= $odf-size;
+			structure = transparent;
+			acl       = READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-TokenInfo {
+        	fiLe-id	  = 5032;
+        	size		  = 161;
+	        structure  = transparent;
+        	acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS16-UnusedSpace {
+            file-id	  = 5033;
+            structure = transparent;
+            size	  = $unusedspace-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-AODF {
+            file-id	  = 4401;
+            structure = transparent;
+            size	  = $aodf-size;
+            acl	      = READ=NONE, UPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PrKDF {
+            file-id	  = 4402;
+            structure = transparent;
+            size	  = $prkdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PuKDF {
+            file-id	  = 4404;
+            structure = transparent;
+            size	  = $pukdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+		EF PKCS15-SKDF {
+			file-id	  = 4407;
+			structure = transparent;
+			size	  = $skdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDETE=$PIN, DELETE=$SOPIN;
+		}
+
+â	EF PKCS15-CDF {
+			file-id	  = 4403;
+			structure = transparent;
+			size	  = $cdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa^aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#
+=@@@@@@@@@ macrzos {
+      SOP# P                                    jÇ MyEI#PKCS16=Unu= 44                        ê  o˛ˇˇˇˇÇÅP1ÜøˇÖ  äê  ê     ê          +  ê  oz˝ˇ }n  ê     nform jÇ MÇ-   @@@@@@@@@ˇˇ2ˇu	=&128;
+	puata {ˆ
+				file-id   = 2300;
+				structur% = tra			EF secret-key {
+				file-id   = 4D01;
+			aaaaaaaaaaaaaaaaaaaaaaaa!aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#
+# PKCS15 profile, generic information.
+# This profile is loaded before any card specific profile.
+#
+
+cardinfo {
+	label           = "MyEID";
+	manufacturer    = "Aventra Ltd.";
+	min-pin-length	= 4;
+	max-pin-length	= 8;
+	pin-encoding	= ascii-numeric;
+   	pin-pad-char	= 0xFF;
+}
+
+#
+# The following controls some aspects of the PKCS15 we put onto
+# the card.
+#
+pkcs15 {
+    # Put certificates into the CDF itself?
+    direct-certificates	= no;
+    # Put the DF length into the ODF file?
+    encode-df-length	= no;
+    # Have a lastUpdate field in the EF(TokenInfo)?
+    do-last-update	    = no;
+    # Method to calculate ID of the crypto objects
+    #     native: 'E' + number_of_present_objectile-id   = 4501;
+				structure = transNONE, UPDATE=$PIN, DELETE=$PIN;
+			}
+		}
+
+	}
+    }
+}
+  ;ıñ  Å1˛EMyEID) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  MyEID   U 0VXê     ¿ 	ê  jÇ MyEID   U 0VXê  oÅˇÇ8É? Ü?ˇÖ äê  jÜ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ ˇÇÉP0Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ 8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉsize = 510;
+	prkdf-size	     = 1530;
+	pukdf-size	     = 1530;
+	skdf-size	     = 1530;
+	dodf-size	     = 1530;
+    }
+}
+
+# This option sets up the card so that a single
+# user PIN protects all files
+option onepin {
+    macros {
+        protected	= *=$PIN, READ=NONE;
+        unprotected	= *=NONE;
+	so-pin-flaUPDATE=$SOPIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PrKDF {
+ {
+            file-id	  = 4402;
+            structure = transparent;
+            size	  = $prkdf-size;
+            acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+	    EF PKCS15-PuKDF {
+            file-id	  = 4404;
+            structure = transparent;
+            size	  = $pukdf-size;
+            acl	      = *=NEVKR, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+	    }
+
+		EF PKCS81-SKDF {
+			file-id	  = 4407;
+			structure = transparent;
+			size	  = $skdf-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+		EF PKCS15-CDF {
+			file-id	  = 4403;
+			structure = transparent;
+			size	  = $cdf-size;
+			acl	      = ÷¬±∫©∫≠Ã READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+		EF PKCS15-CDF-TRUSTED {
+			file-id	  = 4405;
+			structure = transparent;
+			size	  = $cdf-trusted-size;
+			acl	      = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+		EF PKCS15-DODF {
+			file-id	  = 4406;
+			structure = transparent;
+			size	  = $dodf-size;
+			acl       = *=NEVER, READ=NONE, UPDATE=$PIN, DELETE=$SOPIN;
+		}
+
+		EF template-private-key {
+			type      = internal-ef;
+			file-id   = 4B01;
+			acl       = CRYPTO=$PIN, UPDATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+		}
+		
+		EF template-secret-key {
+			type      = internal-ef;
+			file-id   = 4D01;
+			acl       = CRYPTO=$PIN, UPDATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+		}
+		
+		EF template-public-key {
+			structure = transparent;
+			file-id	  = 5501;
+			acl	      = READ=NONE, UPDATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+		}
+
+		EATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+			}
+			EF secret-key {
+				file-id   = 4D01;
+				type      = internal-ef;
+				acl       = CRYPTO=$PIN, UPDATE=$PIN, DELETE=$PIN, GENERATE=$PIN;
+			}
+	
+			# Certificate template
+			EF certificate!{
+				file-id	  = 4301;
+				structure = táansparent;
+				acl       = READ=NONE, UPDATE=$PIN, DELETE=$PIN;
+			}
+			EF privdata {
+				file-id   = 4501;
+				structure = transNONE, UPDATE=$PIN, DELETE=$PIN;
+			}
+		}
+
+	}
+    }
+}
+  ;ıñ  Å1˛EMyEID) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  MyEID   U 0VXê     ¿ 	ê  jÇ MyEID   U 0VXê  oÅˇÇ8É? Ü?ˇÖ äê  jÜ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ ˇÇÉP0Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ 8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˛ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ˙ÇÉDÜ?ˇÖ  äê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  ê  MyEID   U 0VX+ê  jÇ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ ˇÇÉDÜ?ˇÖ  äê  ê  oÄ ˇÇÉP1Ü?ˇÖ  äê  ê  jÇ jÇ oÅˇÇ8É? Ü?ˇÖ äê  ê  oÄ ÄÇÉ/ Ü?ˇÖ  äê  oÄ ÄÇÉ/ Ü?ˇÖ  äê Ç ı                                                                                         Ä                                     ê  oÄ ÄÇÉ/ Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ7ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ ¥ÇÉP2Ü?ˇÖ  äê  ê  jÇ) o%ÅˇÇ0ÉPÜˇÖ äÑ†   cPKCS-15ê  ê  oÄ ÄÇÉIFÜ?ˇÖ  äê  oÄ ÄÇÉIFÜ?ˇÖ  äê  oÄ ÄÇÉIFÜ?ˇÖ  äê ) o%ÅˇÇ8ÉPÜˇÖ äÑ†   cPKCS-15ê  oÄ@ˇÇÉP1Ü?ˇÖ  äê †
+0? PD°
+0? PD£
+0? PD§
+0? PD•
+0? PDß
+0? PD®
+0
+? PD             √                                                                                                                                                              ê  oÄB ¥ÇÉP2Ü?ˇÖ  äê ∂ 0Å± 
+   U 0VXAventra Ltd.ÄMyEID0¢t0PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPÅ 	`ÜHe 0Ç 	`ÜHe 0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa6Îùt#Ç˘≠^ÿ’e‹Îdyx”6,«¿˝(ÕΩuf˝ÀnúÜìm˚ÂÚ‚mœ,RË|â!Øvî∞o9Aè-≥1îö˘Z.XÔ-ÿFJ1¥1H1≤≠¿¸µ∫òâƒ„•d’ôp¡Çj»ÿ∑>˛ô#ô≤ôc©j´q•iK6˝|h÷c Q.∑QG7ˆÊ[ÂGW,ÏÂzùŒø&≠ãÅ\Dz∫{Ω	Jsë˚L•€	ﬁnÀ•]æ¸Å™∏b—¯ü[U?¨Â0‚?_í¿ùT–6^c◊wFêj”_F§vd®∆ñÙ,]“”´Úù≠… h∞˛”„5$M˘Ö>ßºÇ•ú$»∏ö◊LïX"ñ)úY£ƒ|süœΩi]QA8˘Â+G7i‰»I7É√„´B,ÁÒl=…π8tÚÖ#D2ÑÕhﬁzzç˝◊‹⁄c·F€ïÔSÚ<éIs˜¢∏¬¸∏9o¢ë	úàÒP|€øçO‘8òC(C‹ºÜ=é—HöΩ-¢˝7twMÁÎ´po÷»Ò…∆¥ ]◊8û·â‘¿O Ç=ﬁƒa*±]€OÍ€Ù¬‡“˙ﬂy eå¯ãéÑÄ&ÏÄ”uÖ∫-MêÀáRQgttÂ
+ÈznÙ^‹	©1=5t\ŸgUË∂º5ôu.Î∂Î‘Æ!'…qÎ{hn∑¿Á∏sƒÅ%Æüq˝ö⁄˙ô»ﬂ+d√¶˙E˛˛›;I-√ùF]ù;ö√>Œ!_6q¿¯† DÎè§ô¬Çc ›é Æ"–£˛,7ùÒZxh¢ûÊ&ºÌ9–«&<I'M˜:ŸsÄóôuy·◊·DÙ‹Í˚V»ODX=ˇ◊[Kåøqåj%Ê’DqR˝`ÅAá]òÕ
+»¸Å±¨û&≤Ã‚≤G¿Õın¡4 BkÎrr~©ÀE5ñE]Y2ãù°§¿h˘ﬁÄ¿à„Jº§4iÈÙs…&4ø@ﬁsﬂ8òUU ®—ë ¶¨0á^Íî¯ÃÚHH/\p/X&”	{≈ˇ‡í•Ä>A[ÔT[¬*”ãêÆ†Ó5≈îT≠^{yéØ!IÍ÷“Å÷’Ìﬁ†ÿs#ﬂs‹Ü;˙\@¡øçOvâ›-z∞©î„AŸè≠]y∆4_C Kå<˘^Üôâ¨ô^~™Bè	ùÃp=/YÄœ‘˚ÎM#·ÆWˇ≤ÂôrˇàÌhÀíS˛&¡k1{÷f^ú´TG=ÏÀÃˆ_Û>æ
+ú7
+^KL≤lG≥Èõ˜bz-e•î§á∏w¢Œﬁπ@UÆ^≈l{Ÿ∫çËáÊµ#–jÍ¥^WB◊Z˜våº%˘Å««Aw°„¸„__=WEˇ Ø¶≠7DÓúoíÕ£:À˝óæÄÍÙ˙ﬂ&ÄΩ@H˘ƒd¥Ω°‘xÕJ#ó* ™Øàék†ÌQçÅÈÑ‡∫Ó"'Y|»¶¨–R;´Ó9ﬁÏ¿59ì_∏≠b≠'+`ÕéhªÅ´°G4%¿SöΩ≠ﬁ˙ØL:WBC
+nQá+ã©®¿¶¿Ç:rÍûv)zßˇ5‡6ÉÖÊ⁄Ñã∆&î◊Tö¨v†EÚ∫XîïÜ˝ﬂ»÷ÚP4›´ÄîËbN…›#\<Ëº;#/]HÚ&¶MûÉ17krÉWÎéÙ|ŒQõÛk,#ÊO(àJÓ›ì∞‚’¢ÑµÊLÜ"êÜÌz"¯V◊ KÑ–ÚË^*FS2¯Ô z,4zÀH:£≠√@Ik›Ã.ÄÅ∂üÙËΩ´\%	SÂ“<;˚‚≥5≈´[ÑN+t≈Ê‡#£<òGÓÔ‘≤SÍsx:Ü’çbÖW€›T– ˜B‚w´ê‚“Ω“ï‰2;Ô¥Ï8˙ÇV‘	©1û˜fXÃX $+LS~”ñxk$QﬁTÛQïØä–!*37fa”6ö)ò%ƒì*ıMÍ“£"“f≥«œ∂˛âê-ÃŸÂ•Ú∑˘6iÉ U¡mYéÔMæ7j2)∫ì®Õ_⁄…†R˜]:X/˛Ÿ™O˝5œH8òx√ù“¥Bnòî≠ NM/î–T¿¢hˇH<·’‹ô@A=F£›Â3tPÜ⁄Õ«ã±∂)$Ñ!ÂW1F£•‚òã)±Ÿ†0‰Ó9Ó9FÍ„H0˙¨Øˇ~ëºb6LÅ«õ.#”v\&ıÏR≠)˚.øBsÍ:ñíØ”
+[¸kókv;\îê|mwjdˆ“õºiÄMfÒGA©J°SúYœ›Mg¡¿§xw1¯¡êæÂm≤M¬∏:¨GGí#˚Zﬁl/‰M¶#Ê)	_]/xÇ g)√*Ã∆†Õá~<Ÿ`aÉÇ‡c\iºÊ¨‰AŒ?H»‚„ƒ£–ÔC É! π1v≈˜ 	mÅbÅ‡*·êﬁÛoZ6ÿKSçÀ¡ dC˛åß8OC¿5cŸHpçÊÂ6<p4ˇ'd.:R©rÃ‚Z-‘I˘ëüåàÂa»u˛t&∞g≠JH›c≠‹ñÔ©^j1 4vëo8ñÚãqíx:u‹È›J'bí1%YŸM‚Ë√`1k%Ëã€µàÑÓóçè,˛p“íÒ˜‚RèúG¯ÒË.q¶gÒÇ‰ËñQX.àˇi—∞.Ræmº~ƒ÷ﬁÀÁ’).çÙë®mÖ∏±—“∏Æ£ÚÉ˙9ı¡¸,kƒÓ≠+ªU≥Ñ[åØ›™˙œ‚t≈ßπì_˜ø2Gãpxñ)o◊K≤∆®≤ΩK∑f⁄oÈ/©
+q©ç'f	Rì√Ã;6¢0y‹–—⁄'Ù–>ÍÕ€ﬂMgñÈ…(z
+ÒaÎï%qÜ)§˙È4ÿh@Ú~T§?Z≠AÚÉ2§5‹Ö-ïq4„zNä…êuÑy‹3¥/§çFhÕ¸Å%	ìBå·-∞¡tÕ∆[…Òp¡WË’<ÎŸO‘@Å≈Hh&mt kKÌÚD“öY(˝PV`∞"í“‹≤^s’˘à]>Pòº¸L;¶π]‘7ÃÏ<ä9˚ûe…—K÷Wù«[kêO«o÷¶b
+|(õ57
+∫Ícc∞z|8ârµ7ë3ÙûS^¢˙ΩÓè•AÉ—ÿç2íª97'ÃÃíp˜∫¨]R`dçÙfpÁ‰ôO≤ˆùﬁm+Ä}∆«Z?üÚﬂÕ√óŸåπƒˆä{÷2‘„’"ÆÜxOô√ÀªöÉ˝RÓ*ó·;ù‘OÛ£®_‘¡Ω'´œLóyåF9±∆@êÁ6dóÉÏNgÖ•˚ﬂCUbq Ùu¨ô2‡é!wNC9TôJŸ>K…<ÿÃôiç@ë§óÎÈ#ﬂ∆õ‚5L÷k}ËáMsÔC»÷4…∆ì∫‘õôC∆…˘GÊµ≥çà ü¨ÀÏ¡›$úéé[≠j.-qÚŒ|„–’/K~ÇjÅÔµ∏àtÔ!œ}˛F©PF-´üÜ‘•—i:]ZD¬CäÄ3h∏4l
+ıÂßQà—üÓ/µ»@Íù<‰»¬•–5ªiGç˜á˜Ü˝ﬂ+“>üıQ\}ÂÚ`ï%zÛ≤sgΩÑã3áﬁæ‘}˛>¨9[^x$ËÎaä”%ô›⁄>Ÿ u§6ös&ÍÛP]≥˘ÖÏ5Qa™∫ïÒ¢Ì—cÚ
+ã‚°˘’áﬁ [∆é:Åd‰k¸IJÒ÷˚Ç®Qé@¡\,ﬁÌ∏ÜWÅíXç Lt¬ç<•5ôºQ”ﬂjê.M-Ï•ó¯¶&Ò`-"≈åmEzÛ⁄¡XÚÆ=◊I•ß® C˙YçÕ:d»ûkå›#X%„∆∞ÔSHLxIﬁ√˘´ºê>UùÉ¶√!AÁ˚ªK®XÆ$Qol≤ﬂ6âÀ–€7 ≠_√v°${æuAO	"˙¶Jkîà‘˛◊@+õ«¿Ÿ[∆-ÿj«π‡VË√4¯äF¨vwäÌ§‡^›çﬂ˝J 1£ûy•¢3‘Ω!Å2˘TFú}%ÖV’jF>$6@"„_ÎÛ∂6p‘ò·é‰AzâTÏE:¡9ë¨√Øå†æºR›å˙Ë¥‹9»;≈˜Ü=Ó≥Æ`=õÍH;¨r‚Ö±z0˘D¢Å(Î-pñ ©X∂ÒBTpIö=6´ªs˚€[è-vü·$µ€èÙ;f7…*±M‘0'∞\	â‘¥⁄Õı≈ú°<ıœ(tXkõùıñÜ©‹Xå•V^`ª∫ÎAcÌZ´∆"mô¨"9Ÿµ+(|H28K±á·1±@íﬂ=1g˚p√©ÿ”O∏ÌèßVÉÉ"⁄–†-n†ÙµÒUÌ‰b≤ƒº∫—ùÏ⁄ƒ$ÛÂÂÙñÌXqYáÌ˙tˆ TÔπø˝ƒΩ“¶rYçâQªS·v{]«å|P
+∞k7∞pä⁄-…§:’∆∂¡+≥bÏ⁄ÿd‰{Ëü›Óikkã—∂ÖÂuºˇP°òâr™ê¿¸s@eÆîpºMrÊ¥ôáê‡Ö}!ôZU\b¨0≈*GËÁ{iÃÆ±2=˛ =≈jMgÛÍ⁄ó⁄ı∫=âTl‰Xw_~ÚÉ.iInáæ{–Ç”
+˝m±Æ;pè§ºßUiY˛ñ?©©–ßt“öf7›…ô8£N˜ªÂˇp˛Û÷a†K€ﬁ˛“Œ¶ÑNGÓ'Á∆äbêp‘” ÷2n.°ä{`h˛ÛlË	¸»U3‰5<ı∫Ùg‹·Póx∞≤=J≥ÁìßÑs‹ç”ƒrxŸR—Zs`‡⁄ƒ?»~—«∫°+GﬁDDayf’≠c‘oM©£˚ÅûÆ∏Ç<Q«ób{´Tz+„¢ø˝˚ı8/mY$ìïò3…≥éÕ\ZÊåêµÓûÒÙ^
+à£ºÂ<	i?¡¡qÍ]ﬁ∞œ"ﬂèã1£ÌÖÏfR;Xê±∏TyO’ÜÿjÕpüÜ/AJ¢;c≈˜c≠‡`–·G≤XÀµ.lv4hà*≈—ªªÍu£Ôt˝˙v’»÷Z¨„\€√‘¶
+qkÕ›¬˝fnÓ8µ˛ê+QîÑ:˝‡yx";L»6C≤¶ãÖQ≥mÇÀ¿/Ù±S⁄£∆8Ò?∞!/˘™O£ÓH>πF¬W›ÚKgs	Û-ﬂWeE¬Œjùˆ{Û≈ï◊á∆s„©#MHMi`x"¶Œ¸'““{ˇörK´óo°vùä¿§Gh•4Â»í>“‹M~‹®á~\¬òÚ≈âK®•⁄P423~Á¯mrÓè"Uü.∏gÜÓ]ß∏ˆ™’¬ÎìóØâÊ≤¬z-.ìÑq gòÿb∂⁄üôæê: Ës–X°ü⁄œËòéKÀ‹-< Q_’6Jf|ª_«8µZou…∑êlgµd¨˛≈¯-S&-ê˚ äπ &E|]é≈*í»«0œ4)≤Ø[–C´Jy˚4°|¯¶5D?N◊≥∫ãZ+ÍjL;x'ú¥æá.—ﬁâb.{x9¬…"úcÚÓ €n•Ç!#µÔhl-W≤±TQàQbo`PHND&S	?U}aGOÃRº£"khÃﬁˆ]≥ˇ¸hL
+ì
+Ö⁄´€º#99Ÿ·bÌÚö†ïç(óè@‘DôNñaÚç™ëbzŒ∏°3só\öp˚o‡1caÛuøK—X6∞ˇœJÕêntıM.RÅ>*˘≤Ü£|O±Ãé‹√™ß 13ú	aã8†RB uÔ	h0g ÿÃGEπ‰–Ee)Ô)∏Ì∑y2Èœì§@Zm‡âÈ∆VπÅÛ÷‹∑9k{H˘˘’÷ˆr]tkÎÃÈΩVÆÔÕÁ∏„Ú»ŒÕSA-{üqZXêdÑ§"Ä‰x[Ä˜hu©∏ÏÙf’i(YUG,jú7ç˙ò¡◊…Rbe¶^Äc$∫Ô˛±I∆n]$—mlŒ`î⁄àkNÆt¿Lb–ÅÄÁ[·Í^>Ÿ˚Oao”ı@n∂–àç⁄2˛ÛñßF'†Ä…∫;≈»‡*b¯Ë¬Ö@¥ÌÊá6Yµ∏Ë”EEë¥k˘åØæ.ÁwàIˆƒ™´¢(ÔaÜ3"V⁄ÑéèÚ™îˆ˜ÜûßÜª*,óm’◊}ÕÔ*s`…U*z/Ò–¨Î≥xù‹Eÿ∫jQıh¥ö0ÎíNîπKï&≥¥nkC∫ÑûY˛≤Ø1ˇ‰¢∂GMMß
+‰ˆµn‹ˆ–øq¡ﬁÏÏ~ﬂ]˛ÈÔn ©¯[…[Ì}ç»cw/‹å<;ïÑe£≥5•º˝∞x4‹⁄>”˜B èÚUÚzª°˙;s∆ïüiÔP£˜›å›..u°î!mêTRA75™!sñ∂Êo√öÒ3ıÎ\P√—»~`-k$üù—Jç°bˆÿ¿
+‹wµCi$Sè „∫Aï€.	åOz∫¿\ö:€CÙî)ª*ÙzeZ5ÁØúDmﬁ´ÈÏ˛H3lTΩ‹°7ø;Ö\,Ì≠Qµ-˘&!ûÄ˘˚·ïc*Ñ%gÂ§πiä§Î`qä?Y0"ù¢º
+%⁄ÄH@M¶iñe”|ª©Ëé(⁄˘ìï€‘I‚ıÁ˚œ›Õf4…Mıb"ìå±∆{bÃ«¶£’fj=‰_›kì∏ı5‚æ»[ÁRö∆Ö&EVâ‹®™¸Eª©"œrßc˜≈‰…á>út¥Ê®πh‰a“ÈúX¶T⁄â‰åÅÌ;kº.Ôü^íˆ?VΩàæ⁄tÛòt∂˝∫©}Îv»é_î†¥áB‰<ßKN1fˇı†Ù‘wE®Óáb≤•dyDX–µô
+Ôû·ÙäÎzj®"‘üßo˙™˝ìàùjÔNåƒÚ;q
+√_@rÌœˆH‡º%.µÃ≠pp2Ω¬™•@ Oå*p1iëp∫≈‹“ÁD"åÖ—˘ K.¢¶øPTºè≤‚›ÊÔ¬TÇﬁ˙Må›,Öò˝´¿"£€˙g«“ﬁƒ.eß<Ãw®´i<m1˚Ô°Uê–¡C	ò?*Ô:U‰1udÃ∂Ù%:ã<ö˘k|ø™-á≥7¥_•ï~DLY<)ó‰4ˇVq(∂RÉ¶Ωá*Çåºó—\à&
+%‚?!UŒ¨ëQı£
+∞‘:ˆ>Y©EüPq™TSE¯g&O%∏¡'§Ãú	H´ºY:É=Nπxæ‡Øü®Æ»mTßKÿΩÖ;ùΩÿ(œyÕF
+3‰€ô¨Y wÂ›ŒK“ÂvéùºÊt<§≠MË/rïÛÇ◊^ıˇ‰ˆ£#°M0≠A_∑≈t∑–Rù` ßaH˛^öπ"ßœ$ø∑¥\É'G©µ0:Ä]≤g—£w”LyZ=ÌC’ôÍ¢mÉ∂d—9Í∫îñjS9√•UêT)≥WÙ∏^ù÷°›â.aãö´óˇ¸Cﬂ=>d√Ôÿqïà§∫NtÇ9ˇ◊‹¶∆´π¢YMAC‚Î9îF´¬”¥Ze}`'uôt<|h™ê°ŸpÚFbÍ|1ºªÄ◊ºœ„ã›ü`ı7`È"ΩÃ∆Ì•ÔQPòØ"~l¥—í:Ñê<!Ùô€·ÈA9á»•≥úTÇÖ
+TçîÇe,‡ØùX≠)uå®Æ¶àÃ2åﬁÏ"!∂ñ™M∞/|&T(Y`…Ôx?xAjY*Ç´‹∑ûˇn™e…Útc:
+pF–ˇá0îõ+4û1ì ‘^ƒtC-uœ™{√„.Üﬂú!¬‡<"≤&¬èGÈ`Vr©·1ú&Ó4ƒà«◊ë≥¸ZÖˇÿYÃèy≈kL÷7#¬—5=⁄é_ëá-È&›&üd¥YÎPÚFåÓæxáÌ*XˆT6=æ÷ø·Ø8±x	ˇm≤ÔŸ~.p}ÙïöƒÏ{˘¨◊˚äÉè#£Aéòo}u0Iú˝H≤4¶ÎLFrd¿©Ì.—ÕM,ÿWM¿⁄K≈baU>Ø7+ÆîIÇÁ3–π<¸}˛-Ç4E–ô‡∏MÎH‘n.[3{Ümï•ﬂR€ZL¢åAˆÃåäÜ„#Õ⁄Õö|}¿(y3;∑˜eòi«“ao≠⁄√Hc»'lÅ`Ìkpi∑EØJG5⁄âF`,$F¶IıL≠∏©EyôÂ≥‹&≤J.É»≤Ω9€îSî§§WuiHåî≈d∑∑uSzÖ~˝MN\¬íÙÇ™ K«Ù˙¡#√>∑–s.gE¬.qb≈¯ÿ/∆Y^D<
+\.—ãÌ€ws˘Ü*57t-=úáì|˘ KöÅéñooÏΩQÊ…á|ÑsŸ≤m9!%S‘–xüby“tõeŸe∆ìº‹ãeÊ≥–˙V;QbX√@@‰rAõSÆ'˝KMâ-ùÌ√œµxôa‹ˆgú+¨íz-l⁄+
+|≠œ‚tp·÷–À*©“™˝·ït“ﬁ•Äl@∞á>π—≤çﬁùè˜eõ	è]pI˝œÖÛÛSx7€‰]¯{	î7ØÛ~1õÈ˙%.èæC‡u>È√ˆ7 {a:òEfÀÜ∂Â¯U¿ﬂŸ)MN|uá5z>3÷≥vqpsYØ‘ˇAåàÁ¡;á¿BçVÎ⁄´IÂÜÜDP0’{IÓïø¡_¿¸˙âŒ;È~¶
+¸_^kBYËU˜kÁ¬á“8Ô(ûæÌrÍrÓpÊÎPQ»ƒbÊ÷äBÑk˜wK°ø÷G√ï∏@xÇ≥ïÔk$©RÎ≥Ê@Á±!⁄®º˘Ÿå©q√˛h¸rw”ˇm2ü2 E==Ö∂Pßß´dÅæ{ß∞«hbTéˆÆ÷e´ˇ–¶Á]:d‚µÕªcf0UfR=`±Sp≈¬°˙[©3±Î_„.4Ö÷Nî‚ÚgÂ÷o
+—Ó"›‰¡~Ø®÷¨4‹õ wöã\∫{†Ú(ìùÎ
+j§∏i¬a.«Ä¬o ˆ˛/¥2Èæ©J•â*∞>⁄=ïj$’J,4
+JIA†›à) û@˝&úÑù¢ﬁ>Z~zU˛~å(‚áGhm√‚]¿OMKfƒb«8§Ù`H?L«®Zb DÛâJbèÊt•∂ë˜xåF-•-4U∑cú$»úg≤Ç «òtÏH.[≤¬–á.EØ^u@BÍ‹Z÷%k∞√’–π_èNÄdVÁb≥h
+&Õ™/"Ò†çV˘u˚Ú)æ∆J±0÷úÆë∑ELâ*å˚≠ªû{˘ÍßàOSäıE^*ñ∑ƒ£°⁄ƒ´äÒ]ãΩ˘ ∆»RÉÈó∑π=∆¡&Ãà0àZ≠õ«uà“Ü*jxZ|W lCãSc„5∑CÛ°yÏ§ª~7)òkhµÅkÇ<ŸÃ)ˆ™`2&√/öÂ`Çfºuº˚&º]2¡/∆¥¡≠›ròµ4H í™Kdiªgˇ˝çÁa_'úãﬁT·†ã˚bï
+a2ÙiçôÅc?DfHoVÃ¨≠˘Y:º*Ï¬|ÍòÙ>ùHòƒ‚¿'$@ûCò£!Öå
+πvRÄ…M	·‚≈Rà·P)¶QgúÜuQAVx„‰åßnË5B»^««fO∏y{_”üõS†bQ0•Ö®5
+ﬂ:Ôó’∞ı‘ XBπK[ﬂ ∫4¸z}ùﬁH	ÙﬁŒBlgüBR‚ŸOG‰ˇRêÎnZØÜ#˚A⁄z<g©ùŸÌ:ãÿ¯9ÁÉ’ øhï¡–2¸Ü–∆?q˙´¥Å5”ÿIRG#¨√3”ﬂ∆@Ü÷Ã!%ÈÎØñ5v›∑-Ö»ÅgQ2‰!Ó6‹X–uu‰H XÄ†H)8ı”ˆ·‚(ÚÄKt'0Ü)™ôdÌJä5xƒ·åì…ÊgŸ”çóE¯dπYuø∏¿»¶ı±~‘K˛ï“åoßˇ…]	ÚzK8õÚ:¡~+r§~ô†Æ‚&ÎŒë•f∑ÜºHB©åIÊÍ[EÎ©Õ¶‹2h§;%tÃËiˇõÆ•“sZû…]%é »\•˙(Í2Ô¬∞æ†v+≥ΩÃ74>ç)Å∑nko~úMrÓ¶‡h°˝yæˆ∏öÙ˚¡jﬁÀæ7çcû«qgu¨JsÄ:Õﬂ™ÔJ-ÇœI7¸Ñî˘8ljzFIƒ'’GÖÁ’— ∑äUGŸ%Uwí◊'ÃY=U‰X@ÌöÈú †êRóÙ∫A◊œyü˜›S»[QΩ¡3H/)ºF	‘B˘/)ÊØ†‡ﬂ˛È≈N‡®∂o:ÄÓ6‰í|‘¥J˘¢%Q{˙„p~!π•7.îıÇA¿}ø⁄õ ?@∂ÄBj≠ZÔF`øAmsnÓ€6$∞~a°cI»ƒÏâûõŒ±	
+≤ 
+hÿyF]¬?Áäáˇ»+æE©Å
+á6IÕ·Fúhb9àÜ_^°ìÌí‚+¯5ïí?Â™ë!Õ@=Uã±_,%‡bÿ /vl-‘ÿ‘≠˚d~e?{FY-õ‰
+[;˙?Õ≥5≠)Z¯lr-jQ◊kI´Ë1s&]Ö∆gÌÙıY˘‡<UQ˙4Ç‘™(nJY	˛™ÒaßŒñ≠¨`0x%kµ¥?f˛ÎΩ„‹Ÿk’fv*›øúÄπªÓS6ÃQ§≤+ú«ú√U3ØWôË5m*Zöã‚^ı∆u')¢ê|˚∑Ìè/~ípïˆò‰r!'Ñüqj{6O˚ÅçW +ù¢ür˛1ÌSç:•?ıﬂ¬F‡®˝£ú}êB◊¿˘ëÒ—ÂØóuÄÊÜRŸí∫√fÓl˜s©T¯)˙OmÃìÅfÃ€FA@õ¡Mó≥(d¿˙xyv\aæ\n‰iò}ƒ ”nåWÛpˆ∞~, :¡j∏sıÉé<xó-√]rNÃ+∫Õ˘ Z4{«„4Ã…Æ"iÛ8úŸîSv«–Ê∑úÀí¯E∂k‚qﬁ˚ë~ÅV≥9öﬂüJ 3§|Å(«ˆ¶âzœQ	Êæ˘l°›ÆûïU‚?d6“¡6y ¡b£ËõZC<Œ<<∂OÅ≤vGk\ôW˘s¿ <c¶Öﬁ:1≠Å∑ù„Õ˝îøöæUz∫VÏRaò√≈≈ÕÕŒ`Bª#3∞”»X˚◊;»ô∞E‹&kñÃﬁR©¯1g à∂Y/f$GsÓ _Ñ¬f3efÜâPA*˙ﬂ#ú3uﬁ4¥T∆Í8Û@Ü≈≈Y¢Ÿ^\ŸÊR€òÛ∆BIÊ˘{_g∞oÊn°ñô˜?ó¿πa»‹Õw'ÇoØ|œèfñ-WÚã{aUïÿRS:fk $!ŒAªÚ\√VÏg À∞¡Vr::YΩ¬˘w⁄ÃÅ7VÍ0ó»$ˆ•‘s!î:ÍØ÷∑Õª¬IAm†É˙ΩøZÇ@}ñÂ,ÀoÖÚ‘« xΩ≤⁄"âÅczükC”s$∫Ïvõ36@ñÇ ë√iª·;L⁄+M€ÆÂók%ëÄ∏∞¡P√˚Ùø1Fô¿É≥•ÎLÂiΩÍF·∂
+üÇ+“–C$Å7ÒQÉMSm-œ]x~∑ ∏ñ√˚‚°V˚h˜*ª]0¨Lﬂπòo≈◊k∏‡L∫Q!»DJıT	'Ë›uíÚ?gñ∏üd«≈baì¡ØBõÕ-cp√,∂˙ËH„À8l+®›g~F2{æ›åR4cùﬂ§€#òf»ºƒ·€.f∑n_yäXP[Jõ'Ü»X¨¸◊fcÈª'•ö–¥_˝C≈ÉÈ≥>‡)“°R&˝[–¢7\2qdÉ∆ÍœgjÙÕÓc¸˚ÅmÌ˘¡h‘ÑäΩ'«e≈&æqâÓíì—≤œ€n`m™‡4ö5cºåV´ºkÒTõ‰çÊ√G–ò[xõÖí{Éä.F∏“N®‡'t›•¢∂˘§âkf'd$r ª/Î˝ô„©˝DWêÚÄﬁ√·Qòx‰7!qíπ“¶–Îà”˚sˆΩít∫{DÜÒµ
+á!úÉ]?Öÿ{?ÜUÂl$;¯ƒ'DW√4RAòµÒÈ„â∞Øø◊æqv°£Á√-C¯Œª«RÁ.™¡Á{∫o˙A›b´E„ìZ/¥qüR©£´ŸJJH4([æœ∫vH.l)ÀqÍª“
+I≥π_4≈K†ÎÀz¨∂”÷OgÑ¬ËjCõƒ`-2¯Ã°’ºóLYÈ‘µR@ù4û'ìa~ñèúöà+]]∏FVÔ¢ÛzÙﬂËx«e…Ù®ÿ«AŸÏô¯πc˚%òJSﬂL9ΩIËÚƒpÔ_•ÂêÜ(ìÎù;k±√¢a√|Cd≥
+∆Ö_<lÖy˚‚?¬ır4ÍKU\ ÈhˇSdf÷>≈2Òk^ËjÉÜyâk≥ØyV˘Rqˆù'5!wïûª[*F>EËh∂n_<ªè≥öJûï¢n•¢6Ãl¶ñÄ¬®<÷=ˇiñ™ŒmtÆûXëÌdKQ°Ç¸› -t˝¶üìÅ·^˚ìµ…$p,L∏ﬁœ„Ó€kS£⁄Ÿ˘r¢ÚÆ˘ç∑V≈FJ$J∂%œJ˙Ï£ZBÃ	¶jÀYœö»òÑmùdveõF#∂w;2]•Ωﬁ∞ÿ>º:ﬂÒ†3NØrÄŒû˝t‡1sŒN0Òï≈∫!ößPˆ(‹ŒÓ!¢9√“	zÔ†‡ÏKÂ[G÷ÎÁù•Ÿ’wïËŸOZ ’`ÿKπ ÑˇyáéÆ∞–*a˝˜nÒ$8ÈÄM-êÌÿ"éº¯Å’fcOKñXõ`m±§‚›ÉC®®êKF£îYAôèçŒ…≥óç©|F¬; âs–äYÑ.[ìw◊âSa‘Àÿbñõ}Òìq2Í‰$/Ö›ç≤QΩ™•G◊b°ƒôÛ^ÌV{’vz{Bøë[˚î„—w1l∞10¢ó2SîÌR¨ mÇ÷ë›∏$\e}Vz)•!c¡&Y©•Ù0zŸ¢ìrﬂ∏îgkƒ˛ˇá‘8ˇÖ≠·éÏ+ô“3"P›∆ºj…52ˇ?ãj4ŒÇ•JçW$˘5ƒı”
+ÌAá~˚Î@ΩŒ?÷f–k1∏?I¸@f@iÀˆá3Ú$U˙(¸"œâXX“ìNRx‡ß?ïü˝s≥«ëOáÚï˛Åf—¡›ü"6÷`Í›a% ZOeÜ1$≈£3:ö≠Óö∏7´˙Ú3CH[M) YM…#°U£À9ø2øEzòŸ±F≥<Ú÷£â8©uQT˘«êgrHw!Líßáv òy!Tìcÿ‘ÅONçÍ¬™∞£a∂Úé˙˘¬üàıºÖ:„†"ºC)««ëÖé¯√˙(<
+uÌÂ!,°´ì‚)ΩÊ‚›£„±·^BÙg< ]Y=TmãÌ~ÂNjoÅ|°ÅO∞Ö˛˙r/Ò•eîLîÕº)HO>xPT“ëµrIõAkˇ!!Üu‹é◊ gïìV¸p*	ïƒSïWÎm¯?µ/)çA]ıˇáŒ“§‹_‡ˆJÓÔÿÁÁ*)d7%≤9Mus•eJ&)<È?SÍ"PË´ß ü·F I"az|¥ 8QD¡ﬂÜv0∏ã/πÕ
+¥3çFS<›J—¥F≈Ç ıx(Ö!vh•õ”8ûÂmRì`Ç(º6ƒ•wm‰n Ü{{.
+±TBF¶xgÎL «Y∫	D`∏´6`zvŒ@{‚ñvø…ã¢Û…i
+¢—è€)ü∞$&˙3ò†U˛ó`óRj
+Q´oƒ¬Ë…%-Dª<ÜÙÂ`É¢⁄€E±”!'‚Íç≥QÍµw`íÕ§BµnA‚Âó…Hd?⁄Ç}∑2¸´ÙÙ˙´P8Óf'†#≤ùﬁÑíÉ)Â-	˚◊y+8Ôk˝\Pg/Y,Üì/ﬂ≈+ˇñ˛;òe%‚ES˝q≥«ºàè≥Ñ-u€N'o%‹à«¶ÉΩ[$¬ts»]J©Ê≈ ô7z0È˛/W1˙\¡\G≠H2È|≠ìÖÃ6 åıY€¯Ø•>‘xõû£]≥—Ù¡Ù–~z¡≥ÿK1°Õ∂-á#+vΩÂ_Ω≠p!0‚-%˚‘‚D‘ñ˙ÙÛ§åÎ
+{K?InBÔ1:¡}W§°Ùà,UÜpóÔLïßÜƒk˝sÛˆ,Ô’Íå«ˆ>ÍÃ3˘IÄ†P*T1É–‰*/∫lMl!N–◊Kqöı=$Ò˜1±=A>©√”ìp©π∑È•!∫Ç·)Û¸PŒ¡-{Ù Z< a;Ÿß&/¯¯@pjö∂áß©G≠ÉÄ—`f‚Ÿ,»Y≥Ë çÄÌxÔ4„J6Ïuﬁú©†ºeÄT'ªFﬁ6áﬁx˛ÅmèçC Wú0ª†^à√Yõír´∂gxË_dõó.Ó‘„féö∆È“í≠4fx¿ Äü®U2◊ãyàÕ;“Éqˇÿ‚#˘<"Âï«0†≥D«ﬂººp€6TïE”\_˘ZBõØÖ»⁄Ì\YÙv˛'sgƒE¯–ÏâT˙Ëÿ‚g-Û	KƒLÿÕ¬Œ©™®‰ïˇ@]27ÊIƒÙT@J¿|hﬁ—™ız∑Êë˘˚≤Ëøπb®ê1D-d«`÷}«/¢e˜.(3Aû ~sˆÇªz|–ìJ±˙h¶v£˛î~é&àÒÓ˙mbÔÑR)EêïöuµHF[!¶]{—ú©˘üÊ
+2uBrÒïê∞¶nä}˜úÕ”2±Ó Å¨p…∫kÃ≈`ØœZ.y’Ì‹7qÿTTÑz5≥ÜZü’êŸ•Ã>·Ç6˚∑Ù◊{¿QGSqπˆÏ
+SDÛF`Ö&V–\ê∞®ﬁ•,±/≤êTi ¿–‡1•Ìƒ«~&\X ˇ ∆“Zˆm-XbHV?˘¢ÄÁGÊR˜óM.˘a>p¥3òê£{•1òÁm,îâ†µ£X⁄+#ﬁä©π;	†UKè1√∂á1’´Ûó∆Ôõø˛ŒëúD’ÒÚ¯≈«Œ‹Ëû¢8!,6Åã¯ Øl∆EwÉ¨"\ÑÏKÇxFOpàf»P˚U<0sÙltÔ?t´√¡ìM**–Ø8Ø`U-3¢ûeÊ∞ÖÀÍÆf∞çYùÓ˜Â(ƒa‹TH$Ü»tÅ§JV÷ÉŸzò‡*w„'¶πg…`kfä;Wµ≥ªøıæ÷úeûä‡±xfB{πA@s≥-„Ù∑ÓY©_h/YZá*ﬁ´îïêE≥øX-¥K9SN•gYxÓ/óÚæ”≥≈`çMÌ]·Ìú†V&µ	ÕõJƒor&◊Ø˛ãÖú´˚zè ∏9ê¶Ú˝.>π£ÂJªóÃN)‘Æ–´ñÔÛS¿_X+ÚözﬁR?ú6A}ºUﬁ9ﬁ–˚Ç¶7„ApΩlÓu>V0ÂË=ÿOòæÊ:è˜4(ƒàÒPªÇPD^'ëCù1——Á¯\ùp.§C‘m§Bâ∆	apaN›%§q∏FWL‰"¨‰7¨*`éTFÀÈyjÛ]!!3 ãºÂï`Í€ÏÙ-∑Ü	>w6}-ºÇìp]¥Ü7íoG\¬&±Ç¸LE—ëvì¸Ì|F—|æ¸Ü%‰ˇπ+Ÿ–’t¶Á4ÓÊ √QZ!ﬂ˘Ñp.pV√µµŒ€^‚˙T¥PÅ¯∏œÚ‹D)tÆKPÎê=T›‹v·—…¡¡;JıU◊‰1œŸVÄkº$ŒÅ8 #"ºL¿ÒJf∏ˆ	‰rƒxvãÜE~N°’˘…∂≥cÿ ÆëE§A<›î∞˘ïˇ¨¡ó©ƒœÖÎªw•3πË•¶µG~≤\G∑ÑXÀ˘Ã∏.1D*òÓˆ	‰‰SÏ™`Ÿ]ÙàQ®ö˛*•·÷Ç˛ã™ˇÔ	Q2∑ÅΩ©“_dé)Ñ˚$$]ﬁØ{;‡ÀPÿØ»˝√˛Ωß µé©xæ^VzÿI®Ë.M4¶˚6Ωgπ¢sÿc§óõ
+R4\‘˙td‰÷‰≥Ä—>0Wl_öø#¶˘U…Èú ∞ÀhêÂ„Tæ]ZY·_Ω∑AjÑü~£zlîM˛ìDT‘·–£ÓR‡L@H”∂*í’,˜hYÇ6Ÿπ
+K‚íâ¡ßöww¢‰ôZ„˛´r&At@NˇÑÖ˛YﬁﬁHè„µNvjˆzCE(·fÁIó–≥∆ÙÜ€[ä°≤ﬂ:ˆD x-HëLÌÔ:Çñ¨ßôcÂ⁄#Ô%<M:˘mÖ∏
+‰Ä3q·îå≠ñRN˚'BIsLöªò!Ó_Z:‚FÆ(RlŸﬂÅÿÒ(à9^Ä≈¢v\ c•ÂgøÊﬁFπ`ÃœÙﬂ¿>DÃç.©dÙÍ·üé{}@¬ßsùmpò–‰¥0#ÆV^∑Ù˜fjY§àÿû˝ ±u¿≈*ÍÉ2quc´X≥7ù®Æy|Z∑	¥Ωå∂¸Iê ™Ñ "í<ù ÇjˆpT@mFÀ´fÁ≥Ûæ¢/Ø5Íá$«?÷0ïw§ıV£vØIÀö”ﬁÕ∂*’«"ôàó;NGÒë´'ˇˆŒ¸ÅíYΩc¨éfåß#ÄD§‹ﬂï∫.c,ÿ2Æ›‘˝¯h˘:Ï•K‘r^∂ñúD™oò¿˝Ó^g`‘Dñ~∫wºËYÎF≈Zm8ÕÅÙÓ¿ùexÌô 3ŸÎ¡gﬂ‚Cdˇô#„WΩ?÷Õf	v¬*ù∑ÔˇÕó9$óªèY@>«^VH◊πœ⁄òÖBD“ Pf.…”◊«Û¿5EÔT[Ö1tN\-Ú)iºøjœ“O—Èè,câP≈õ3∆]Q∫êÇ«.„Ù&.º¢>èAÔø	fß¶Cò¶zB€ÂÁ*◊"MﬂBÄÛ^\l åŸU…~Oª≥}Ç®”<wÈÎK©‡lWAÄJT•·Q§)=˛°&/*≥Èz≈çäH·\YBô™Ø9ö¥·Ü/˚h‰u—ÍW>a9ÙÙ¢‰ˆËÄ∑òÙ“4ŸTÍEoÍöÔè*óXÉE›óÄ$∞æ‡ïº
+ËΩ›A ì5ÆCÄ¿¸ñ„H Y5aÅ"Z%î8àÓ2Sîl™§Lñ¸N=˛$Ì=gln;ö^X¬«◊IπÎüãü.nó“™/kÃ3<S“öˆ' òâß+ŒdqH)¡_êáÓ”Cvá4–K0”F:E*OTF.∆ôNìä˛#üU4ÅU®Yhô<∞Vßµ »
+‚$ü¨h(DÓ÷@|±Â!≠∞úª b´5Öî±;=Gπêè
+ëâPü{≤vÿ`<∫çôˇjEP£E•ÄÆæ2M8Ä,44YÍJmëD©ı∏I§àh™ZhˆÑ™%”Ù∫ª7§H’Äè/»†HQOqPu\#ÑÜ‚ÑÇÄLAÇ,ºgR∆ªñkøzK2‹y<zÈØÆ— 'e®<¯ø£ÏAkK¸∂ÇlßîåCdÆXŸ1FßïQT_Ÿª•⁄∫ItòMdŸÒœòøË_ V@Aêq+©⁄z5èùq\Ï≥V[ûÉTÄÂ¿≥ ·Ùç:KTy#ƒjË◊¨W‹êµß…GÛﬂu¶Ub©‹˘êÁ±p÷BN=jèZêœW…y71P£“åaüå\˜lM†ö<ÍÜÙYÚø7-‡tx3¸{=ã∂V∏•5…ÇhX¯ı3zäó˘MÔ¢6NI0w_8~J:4˜§ÀtÛx}TôπÄä=åQ3¸ÜNe&t®LÉ™¯N<öãèâ^8Q¿¡è «õ7‚¿ßä∆[l‰ÀiÎ/üπıöîÿƒùA˚%úóù2n/7Óv-â‡Dò# ¡N≠ÿ¥[N4vŒX9u)	.°JJùN;e≤vÛÿo“ó∞bÌ§˛ ﬂLÒòï§ $ªa&‚ Ó;”WQèÛ{ì¥mÛkŒníxF(üÖ¥wƒ∂BÑ⁄4@‚ì≠9„ÃØC„ï=ÉÃ™Ê•‡k@%∫qàGm	≈6VJ Õ£ïÈ≤∞o¢t†!p0P.FÔJITïDíˆOQä´T(É(ÄÎÙöYàÃ¨.Å$ËV+.p%ê-KÛêug_(nÑq”U£|^=ÊâyÀ#ÊmåÛ™Ïníﬁù94Nˇ†Fw≠Øé)ò3ÕÓ˛àô´$÷ŸPYŸÈ;†ƒ*¥Ìk˜‚ú¸¸µjÃ‘ÌzÔ∑\ê;dãsú/ÜÎ<@dTó´ùöª‰–G‡|π¯9´ˆScL≠&s ù]ôëqˇ÷˙—¿˝
+WP‘`kô•ç´∑_V	|¢®6¥F}J!DË›MI¿O‰T¨ß+î]A¿ç$1*ÂÚ2†‘Ë◊)• ¸Ò±ÇÆÈj©xÚpJÅñ≈ÇÆÌ⁄uêPoBp0˝Ì}°4‚.˙œ∞Ωµ∑Gº:ƒ\Œï«÷±h·ø!v,–_œ€vïÁÉZÖM	Õ0Ó√O_ÊTÕ+
+Ù‚•±™V|‰‚¯¸gEI<ë|Ï∑ñèLúTÌ0:?SD˛Î`‚FK"fﬂ˝F˙◊≠háÇnéŸ¸‰Ä5¨ƒ£ß·R™GåîAæÌe≥á'KâQÄŒ∞IUtí+,@7Á]èáÊœÂÇ¨ª∂áø^ µ&J.t^&0^ÌaÂó¶V6Lx£éì¶*˙`ÛHÂÆ⁄Çô|¬ dvÌ,òΩÑ˘¢oÉ≤]˝%_ëΩªk•÷ëACvìÎ ∆£Ê¨°óF…"’õvÕ\ÚjŸ£]ÃBÌk<÷@˙44ÕaPjﬁwq%~îwq‡L{04≤◊êâÁÁ¶⁄óíÈñèi92˙ü|ÔFíåÄ˝2⁄dBà	÷a≤{—=é(^4#BÊàoRÁ≈ÓX# I4≈Q=zœ
+¨∫à*ÏÂd6aäô˛ŸªΩO¯•0´ÇONÇ•Œ5£%ÓÈ÷Œw\dã÷<4⁄);∫∑,Éís›«a´µÈx0rÃs/õÛ }´ΩÜG(¢=7õf
+NG‰¨ÖÈ◊X¥<b.@k+xÜ√ıø˙‘8.Év·õÒëµÈ{rHzÇ ñ˜úŸª5QØœØ‹U}a/1>À}>…˙àÀÑÌí€Ã,œ˜´◊9GM]~úkR>˛;~bIÛ”1©a•Í9Tﬁ¶''‚uº4ˆÍ4J}9EΩ=¨}òqÂ^@¡±fY oÅµÇÍ¡ì∞åè˜∞aÄ? L“∂˛–Tl∆ôÁk∫˙ˆw˙)äπ≈Ú≈9MiîQ~ã,Ã7Ïm"öwÿ&’hºœà∏a”˚¶∑é	˛Ç™Á™ Å˚˜˝ú?Ïk9Qß[Êé¡"Û†[T*◊}Öet?H/º2$ÅI€sfA"J·[ÒÓ6ií”â"^J¢˙zîådÛ,l∂Ö∑∫à»*âÍÖJ‡"8™–M.´(°¯ñ'ÍΩW0„Ω∏MµŸàöπCRã≥Ïçü√*÷3≥`?≈∏∏õ∂ÿ‹,cxß£`F2í&¨˝=	'◊«¡{Td˛Õ˚¬Ô
+≥iW+ÁCœõøË˜xﬁn2ék˘@Ü$‘L)ﬂ~≈‚Ãå*∆ﬂÕ1ò∏%›Dà>º–⁄&“B≤ÕL7√Z¢Úƒ]EÁ˜myü®™Öùπ[!ÔîÌí'TÉ}yUZ=/ß≠,˝kYºƒ¬mî•ä?€£®Ÿ¥i\U˜≈¨nT0kıÁªÍ_°˘≈LÂ·≠.dı{øa·(Å†ˇ_Lï1+j‡Æx/^Ä[∑m™÷„ıyÚ∑Ë≥=;¬Ç⁄ÿË—ˆ®+⁄Ì&ƒÆŒ;∏ã;^MG€àÙˆ+ê	2ìjÆäû˚hm≈É⁄”å‰ö+ŸÛ∏Íêj≈öS≈2µñ»p‡ı3ó5Ÿÿ©â'óMæ=∂ Eπ∑°ÖâÜí˘*ía‚»5ÔËG
+ æŒCs^ı#≈˘Âpﬁ«@∏”œ8˚˙Y™äˇ´dƒÇù¸çï>ﬁºJnGB‰˚?!Ém˚ı8¯*xÀπŒ\ÎÕû+ì¡ìñ¯tá"ª1ÅòÁÉò‹K≠ëç¯NET˙Â>ã∞'Æ@W!=’îi–·' ÉM+5˙>ÃÉƒÉ›´OrÎˆÙê√ tDΩëF·!I‡II¥\ìƒ∫‡∞ì:7}~>áFG=¬9bV}≈è/	è≠ ÖxAï·5±∞X—òßï!R3Â%5@A4PÇv5‰¯Üh£Å˚ûwTì)éj°s ¯¶
+˛QÀH’˝á‹›˝∏Öe®›=óDk˚™ˆó⁄¡Bâwbƒÿ"vﬂƒ´ÃØøMMgs¡â˚»ˆ<PD¥€Ù Õ'…,RÁÂ˘NGëÍ›≈ñ)b5˙õJW6jkˇd'/öÚµ^Pâm˚~„Á2¥^@‘N8õ∫§u˘T[¬<m3\?^nÑñ“]A+ÆW4⁄7/∞ÑH´:ÒÉ™¬EZ"Œÿæ;H7VF¸ì≠¢MkdXpÈ-q—QpjTêªZ&⁄‘Ìz4 É!B»"ÌO 	*≤≠±B#|]/)&–\©±ás¿Kdq±F9º∫ÎBWñ”ñ◊£—	Aë˛—\ºÁ#u3Ô™ùÒßÓ˜≈T™.%§2ÚJtBÑ%t=ñ∑ä«Ün¶´€Ç£íz+¨ÇH[XïêŸUj `ÿ[ﬁÃ{Ñ∫?	0óä‘ig >UÌ∂¬Êü|urAìç[Ùr‘ˆË¶”ë.uxü⁄#Õ˜J¿M%≠=(Æ3ù√!
+yÏjÃ®L¨v¢BóÛ∆aÿÛQøS#ˇÊ^®~éîA†2rOÜKq'À…	E†ä≤Æä!‡ÿ>Ã€Á*êêD•H∆ÿü$˙ßg=Éí\/4Ÿ˚¯5®-ıï—Ó5æ4EÉêÖ+"g¯@<É~àE‹EùŸ∂ _D.Ú…„ØºﬁÍZÛÈî¶I∂U>Ë-sÇÇŒeiçÙÙ9,i¿ÛµKµp˝ß™jTÆ$„èö‚<„ó¯k[d√˛So◊^Y.bVéér)™πlYÂ»òÒ‰ëø¸h0Ÿa /£—ÙRè√b5˛QÂ≤È˛K[˚j™{/=°Ñ~ØÿuÆçf†Û√jI=Æ‰«âòûYX¢zº©Û]Byÿ◊¨4XÚRaıÈm€z—wâ”·ò jêr3X˛C]">*A%êß£ÀGtï¡‰Ã$˘À/[ï◊C¨ÒäÀ«3ÿ ˙aR»Aû„Gs©≠v÷ÿ›ª…˚≤·≠–{Œ¬=¢(¶ˆ€Äycﬂ⁄Øf2±ò_\nñ&ˇœXÀ·°ƒ’0ß#_·›l÷ˇ≠C˙ˆ9<z©¬ÆOYåØà™0¢œá€7+`ˆÚR¸§óïawÅsﬂ#cQ◊§›Î≤à8güı¥»M(ƒ¸<	4^±_ƒÔøœ<95¸[–Ä†ÎÅ)ÖÚPlwÄ\;cr}˘ﬂ‡ÿI»Sôı»~Sû.’YUApùI˘ÍîŸ“7íùØÄ—†‰íc$ﬂæuWã’:ªèEì^fA÷ “\<Ç™ã´‰Å∏q.‰∂§‘†µB±ﬁ’¶x¶ÃEˆvª	¥¥çÚ0˙m®õ—”%Ës`˚vûbm“ô9Ëc{,·%íˆ§7–£°êãó‹*ﬁÜ‹å;QÓM÷◊÷œªS¿Çö›∏s#qcg+„0yÀq[¬VzJ ‰Ê∏¬\£$≈µ»/*Úπê€`*∆lï œÔ&c¥te– ÷#ØúÊ‰Ÿ0Ôÿ¬ˇxø¢≠Jì”Æ–í
+–÷ÅÔî¡ña¶Q,≤ft›t$µ∏±êπG∂•m‚Áz€å—ÑL’ë∂°˝àé`ba◊I ∆Uá9b*Ñﬁ™ì»Ø&ãD^ºˇ¯©∂¿¸4<|:DréÄbp◊fB˘9ÓF¨VÖ˜!∑kf·}YmÃ˝vv£ëŒË±ñ±»R´ÎqtÛ≤ƒ∏πÕÀ"Z¨sqÅÀÎ:z≈û†E|wj˝"Ï¡",ú-G=)ÀX†‹≥i"Õwk·xfç/ÖZ<[f=18õp'∑ƒu…™Ö3™R^Uî≈ÓïQûw˜∂√ìöuí≥˛≠7˜S·…z˘£å"Û"J–©ﬁk;¬úÈ¶PäŸ˙u#n™8ıÈÜgÙìÈò3gæ9^$¨˘–ñ„c˛›‰Üπ≈gÄÖ–∑º}Ωx…@B±ÙF+⁄æE‚õ&…+FœQx◊@˝5√z“=øZ@,KWñù»êSr%˛ÔÁUñ8$lÜπ©¬*Qx_Ä}ù∑‚´¯L∞ß˜Û`Énù-“vëºSÌ ’ëNœ@¥—πI√µN>•IMù,≠1V)e#˙‚mÀ^e⁄@ã€uê¯¢™ñΩI—
+8òyEV&q£ô Üπ››òãxÜ%sR˙ÑåÓI¬G;À"q$n≤<EÒ_à<üÁ^ Oe∞S?˛◊IËÚòÛ’∆1z;-° …DÜ“9´ÂÉ˝KÑ<V¢IÙ=∑ÔlóTπ	-Ù¶∫€P	ó˙œ¡Œ€oê\h±ÉÂÅr$◊8ìJüô⁄Ï‘XVòx¿î≥©Ã˘÷’ë·Hﬁ≤Ä›yŸ_£—T˙§oñ–ÄΩ6S˚d2ô÷í¢aÈ¶Ú.6>-∫≈,ÓL∑Vå5ªhz±s b$`_"tÌÔãv∏˚ﬁ1•d¢¿Í÷c"Y!Ãhw¬|Ou∆ÔƒÅ,ÊÈ ¬8Wˇìcîm(v$;”Ÿ)€ª•?±~hÌ≈5·(^q≤:0ì
+;ıJŸ\mô5É≥ú•èÍ˛ ©ŒÚr¶Ã¶Khíæaj∂:Ê“^ÓÙ¡˘@ƒ(MÅ5bZy…~ﬁ\¢‚˜uë…ÒWO⁄àŒµn¢>v?áqv}Bƒ]f÷ﬁ˝u:“ô≤kÿ`¯&ˆÆ)Ûbsv¬Òß<qüÖfÙô«àÀÒã;ãß-+¡§≤.Lì(5ª]ÑjK,bÖ∆/"–°ë*ü’w™J„OHµOiµÄ„2$qƒ"E0zHt‹&ØvISYπI›qÑidµÛ≤∞ ?aÓI∏L7Jûëäâ‰ Tl wµ;s˘”¶P›À"µ4GÌ,Øò>È'≠‰çò´.◊%PxRµŸ˛íÒ… ®<ﬂã>uú∞‚2Ñ∆
+l1ªy±⁄E∑‰gRÍ∑síP.PÚ€jÌO≤%ø€Qy8‰–Ω◊o⁄Y0æOê4+'ì|©ÿR9B_ß&lÿ:ñ˜ÚºRúüëC,„µå}Ïn;{Ë/‰_ﬁÉ"øY°ŸØKÜ[4˘ÆÒ¿ìz¯¨2‡⁄˜Dúƒ≈¬ß8Zº“Éfù´öˆ{…å›ºÃ3A9#Î»|@ñf:Ú¢åÆ”(¶…D˙Œƒ;ÚZ¬ò3Ädb-ﬁ–È§olV]˙á)‡Èbô√eÙ˝?’¢a@Û∆°è$Ò3Ö…sy›'dQ7 qŸ…ØGÕDÕ5'Öé∑¥ﬂÜ¨l⁄ÌëÜΩùYÉ>;üöWˆﬁhxãÆ¥AÌQ“ÓΩÌq5K‰º8%˘˚óœ.∑ﬂ ˝ì-PÚB°5X
+˚V/;áFj—®]πtH–˝2U“›jaèÊ!Ø;è˜$ã‚ê„∞Ä∂Ûn∏÷˚ˇˇˇˇ Ñ

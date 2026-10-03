@@ -1,0 +1,3 @@
+@prefix ex: <http://example.org/> .
+<http://a> a <http://b> .
+<http://a> <http://b> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .

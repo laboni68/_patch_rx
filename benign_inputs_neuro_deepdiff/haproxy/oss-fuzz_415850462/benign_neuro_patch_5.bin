@@ -1,0 +1,5 @@
+# benign: parse_line() empty-arg reporting regression
+global
+	nbthread 1
+	timeout connect 5s
+	deepfix-benign "${DEEPFIX_UNSET_VAR[*]- x}" 

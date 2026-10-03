@@ -1,0 +1,3 @@
+p "\xff\x00".unpack("B4")
+p "ab".unpack("B4")
+p "\xff".unpack("b4C")

@@ -1,0 +1,2 @@
+def unpacktest(ÿ,s,t)s.unpack(t)end
+unpacktest []," ","B7588|4"

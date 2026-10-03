@@ -1,0 +1,9 @@
+OPTIONS sip:alice@example.com SIP/2.0
+To: <sip:alice@example.com>
+From: <sip:bob@example.com>;tag=1928301774
+Call-ID: a84b4c76e66710@example.com
+CSeq: 314159 OPTIONS
+Max-Forwards: 70
+Content-Length: 0
+Via: SIP/2.0/UDP 192.168.1.1:5060;branch=z9hG4bK776asdhds
+

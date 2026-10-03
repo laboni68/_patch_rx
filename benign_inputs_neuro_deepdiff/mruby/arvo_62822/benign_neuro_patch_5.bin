@@ -1,0 +1,13 @@
+a = "\xff\xff".unpack("b4")[0]
+b = "\xab\xcd".unpack("B4")[0]
+c = "abc".unpack("B4")[0]
+d = "\xff".unpack("b4")[0]
+e = "AB".unpack("B3")[0]
+p a, b, c, d, e
+raise "bad b4" if a != "1111"
+raise "bad B4" if b != "1010"
+raise "bad B4b" if c != "0110"
+raise "bad b4c" if d != "1111"
+raise "bad B3" if e != "010"
+p "\x01\x02".unpack("b1C1")
+puts "OK"
