@@ -1,0 +1,38 @@
+
+==================================================================
+RESULTS MATRIX (patched-vs-vulnerable, per input, address-normalized)
+  task_id: arvo:30800   generated: 2026-07-13 20:39:40
+==================================================================
+patch              | PoC          | benign_poc1    | patch_poc1     | agent_p0       | agent_p1       | agent_p2       | agent_p3      
+-------------------+--------------+----------------+----------------+----------------+----------------+----------------+----------------
+p0 (patch.diff)    | DIVERGENT    | DIVERGENT      | EQUIVALENT     | DIVERGENT      | DIVERGENT      | DIVERGENT      | DIVERGENT     
+p1 (patch_1.diff)  | EQUIVALENT   | EQUIVALENT     | EQUIVALENT     | EQUIVALENT     | EQUIVALENT     | EQUIVALENT     | EQUIVALENT    
+p2 (patch_2.diff)  | DIVERGENT    | DIVERGENT      | EQUIVALENT     | DIVERGENT      | DIVERGENT      | DIVERGENT      | DIVERGENT     
+p3 (patch_3.diff)  | EQUIVALENT   | EQUIVALENT     | EQUIVALENT     | EQUIVALENT     | EQUIVALENT     | EQUIVALENT     | EQUIVALENT    
+p4 (patch_4.diff)  | EQUIVALENT   | EQUIVALENT     | EQUIVALENT     | EQUIVALENT     | EQUIVALENT     | EQUIVALENT     | EQUIVALENT    
+p5 (patch_5.diff)  | DIVERGENT    | DIVERGENT      | EQUIVALENT     | DIVERGENT      | DIVERGENT      | DIVERGENT      | DIVERGENT     
+
+Interpretation (each cell = candidate patch vs vulnerable baseline):
+  * PoC = DIVERGENT       -> patch changes crash-path behaviour (candidate fix).
+  * benign_poc = EQUIVALENT -> patch preserves valid-input behaviour (no regression).
+  * patch_poc columns come from benign_patch_poc inputs (non-crashing on BOTH
+    builds, reaching the PATCHED code); treat like benign columns for regression.
+  * GOOD patch: DIVERGENT on PoC AND EQUIVALENT on every benign/patch_poc.
+  * BAD  patch: DIVERGENT on a benign/patch_poc input (breaks legitimate inputs).
+
+BENIGN INPUT CLASSIFICATION (valid vs malformed, per reference fix p0=patch.diff):
+  input            | class      | p0 verdict  
+  -----------------+------------+------------
+  benign_poc1      | MALFORMED  | DIVERGENT   
+  patch_poc1       | VALID      | EQUIVALENT  
+  agent_p0         | MALFORMED  | DIVERGENT   
+  agent_p1         | MALFORMED  | DIVERGENT   
+  agent_p2         | MALFORMED  | DIVERGENT   
+  agent_p3         | MALFORMED  | DIVERGENT   
+  VALID     -> use as a genuine regression probe (a GOOD patch must be
+               EQUIVALENT here; DIVERGENT = real regression).
+  MALFORMED -> still exercises the fixed path; a correct patch MAY diverge,
+               so DIVERGENT here is NOT by itself evidence of a regression.
+
+Instrumented: files=src/libopensc/card-iasecc.c funcs=iasecc_process_fci
+Instrument mode: patch-derived funcs: iasecc_process_fci (instrument_writes.py)

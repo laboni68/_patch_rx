@@ -1,0 +1,10 @@
+>>> iasecc_process_fci
+iasecc_process_fci:ctx = 0x64d625484540
+iasecc_process_fci:acls = (nil)
+iasecc_process_fci:tag = 140729759565565
+iasecc_process_fci:buf = 140729759565565
+iasecc_process_fci:buflen = 3
+iasecc_process_fci:tag = 0
+iasecc_process_fci:rv = 0
+iasecc_process_fci:tag = 0
+iasecc_process_fci:acls = 140729759565567

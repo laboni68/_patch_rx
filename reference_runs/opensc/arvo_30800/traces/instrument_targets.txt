@@ -1,0 +1,5 @@
+# DeepDiff instrumentation targets for arvo:30800
+# auto-derived from patch.diff (override with --files/--funcs)
+# mode: patch-derived funcs: iasecc_process_fci (instrument_writes.py)
+files=src/libopensc/card-iasecc.c
+funcs=iasecc_process_fci

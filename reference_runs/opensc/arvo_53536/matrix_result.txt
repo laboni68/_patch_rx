@@ -1,0 +1,24 @@
+
+==================================================================
+RESULTS MATRIX (patched-vs-vulnerable, per input, address-normalized)
+  task_id: arvo:53536   generated: 2026-07-13 20:47:40
+==================================================================
+patch              | PoC          | agent_p0       | agent_p1       | agent_p2       | agent_p3      
+-------------------+--------------+----------------+----------------+----------------+----------------
+p0 (patch.diff)    | DIVERGENT    | DIVERGENT      | DIVERGENT      | DIVERGENT      | EQUIVALENT    
+p1 (patch_1.diff)  | DIVERGENT    | DIVERGENT      | DIVERGENT      | DIVERGENT      | DIVERGENT     
+p2 (patch_2.diff)  | DIVERGENT    | DIVERGENT      | DIVERGENT      | DIVERGENT      | EQUIVALENT    
+p3 (patch_3.diff)  | DIVERGENT    | DIVERGENT      | DIVERGENT      | DIVERGENT      | DIVERGENT     
+p4 (patch_4.diff)  | DIVERGENT    | DIVERGENT      | DIVERGENT      | DIVERGENT      | EQUIVALENT    
+p5 (patch_5.diff)  | DIVERGENT    | DIVERGENT      | DIVERGENT      | DIVERGENT      | DIVERGENT     
+
+Interpretation (each cell = candidate patch vs vulnerable baseline):
+  * PoC = DIVERGENT       -> patch changes crash-path behaviour (candidate fix).
+  * benign_poc = EQUIVALENT -> patch preserves valid-input behaviour (no regression).
+  * patch_poc columns come from benign_patch_poc inputs (non-crashing on BOTH
+    builds, reaching the PATCHED code); treat like benign columns for regression.
+  * GOOD patch: DIVERGENT on PoC AND EQUIVALENT on every benign/patch_poc.
+  * BAD  patch: DIVERGENT on a benign/patch_poc input (breaks legitimate inputs).
+
+Instrumented: files=src/libopensc/card-authentic.c funcs=authentic_get_tagged_data
+Instrument mode: patch-derived funcs: authentic_get_tagged_data (instrument_writes.py)

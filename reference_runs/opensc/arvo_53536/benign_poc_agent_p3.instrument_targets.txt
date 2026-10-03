@@ -1,0 +1,5 @@
+# DeepDiff instrumentation targets for arvo:53536
+# input: benign_poc_agent_p3.bin (kind=boundary)
+# auto-derived from patch.diff (override with --files/--funcs)
+files=src/libopensc/card-authentic.c
+funcs=authentic_get_tagged_data

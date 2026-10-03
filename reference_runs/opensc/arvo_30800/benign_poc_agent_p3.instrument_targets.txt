@@ -1,0 +1,5 @@
+# DeepDiff instrumentation targets for arvo:30800
+# input: benign_poc_agent_p3.bin (kind=boundary)
+# auto-derived from patch.diff (override with --files/--funcs)
+files=src/libopensc/card-iasecc.c
+funcs=iasecc_process_fci

@@ -1,0 +1,18 @@
+>>> iasecc_process_fci
+iasecc_process_fci:ctx = 0x57f948ce4540
+iasecc_process_fci:acls = (nil)
+iasecc_process_fci:tag = 140728217983901
+iasecc_process_fci:buf = 140728217983901
+iasecc_process_fci:buflen = 3
+iasecc_process_fci:tag = 0
+iasecc_process_fci:rv = 0
+iasecc_process_fci:tag = 0
+iasecc_process_fci:acls = 140728217983903
+iasecc_process_fci:mask = 64
+iasecc_process_fci:op = 2
+iasecc_process_fci:op = 255
+iasecc_process_fci:op = 20
+iasecc_process_fci:op = 21
+iasecc_process_fci:op = 255
+iasecc_process_fci:op = 23
+iasecc_process_fci:op = 22

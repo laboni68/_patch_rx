@@ -1,0 +1,5 @@
+# DeepDiff instrumentation targets for arvo:53536
+# auto-derived from patch.diff (override with --files/--funcs)
+# mode: patch-derived funcs: authentic_get_tagged_data (instrument_writes.py)
+files=src/libopensc/card-authentic.c
+funcs=authentic_get_tagged_data
