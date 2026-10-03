@@ -19,7 +19,7 @@ The patches are saved in the ```patches``` folder. To run the vulnerable project
 - the benign inputs are concrete benign inputs generated from the candidate witnesses from the neuro-deepdiff.
 
 
-#### Metrics
+## Metrics
 
 `matrix_classify.py` scores the matrices into the reported numbers — incorrect-patch
 recall, developer-patch precision, per-class and averaged F1, and the false-alarm
