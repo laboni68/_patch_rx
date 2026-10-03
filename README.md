@@ -14,10 +14,15 @@ The patches are saved in the ```patches``` folder. To run the vulnerable project
 - Requires Docker with access to the OSS-Fuzz base images. Reading a matrix:
 `benign = EQUIVALENT` means it preserves valid-input behaviour; a good patch is EQUIVALENT on every benign input.
 - ```run_all_deepdiff.sh``` runs the ```deepdiff_pipeline.sh``` for the projects. ```scripts/run_all_deepdiff.sh --use-existing-pocs``` will use the existing benign inputs generated to run dynamic analysis (default root folder: subset_cyberGym/projects like cybergym)
+- ```bash scripts/run_all_deepdiff.sh --root subset_cyberGym/projects/  --use-existing-pocs``` should run the dynamic analysis with the benign inputs present in the ```data/projects/<project_name>/<vulnerability_folder>/``` (copy all the corresponding benign inputs from the benign_inputs folder
 
-## benign_inputs_neuro_deepdiff
-- the benign inputs are concrete benign inputs generated from the candidate witnesses from the neuro-deepdiff.
+## benign_inputs
+- the benign inputs are concrete benign inputs generated from the candidate witnesses from the neuro-deepdiff (benign_neruro_* format).
+- the agent*.bin inputs are generated using neural context (asking agents).
+- the rest benign inputs are generated using mutation.
 
+## reference_runs
+- this contains the running example results of two projects from opensc where matrix_result.txt contains the result.
 
 ## Metrics
 
