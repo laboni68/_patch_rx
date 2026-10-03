@@ -42,7 +42,7 @@ rate. `--adjust-sem-eq` applies the equivalence list checked in at the repo root
 
 ```bash
 python3 scripts/matrix_classify.py --base-dir <matrix_dirs> \
-    --validation-xlsx metadata/cybergym_validation_151.xlsx \
+    --validation-xlsx metadata/cybergym_630.xlsx \
     --ignore-gt-fail --error-as-discard-patch \
     --filter-non-benign crashing_benign_inputs.tsv \
     --exclude-patches mutated_bad_actually_good.txt \
