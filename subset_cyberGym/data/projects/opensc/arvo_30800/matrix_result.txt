@@ -1,0 +1,40 @@
+
+==================================================================
+RESULTS MATRIX (patched-vs-vulnerable, per input, address-normalized)
+  task_id: arvo:30800   generated: 2026-10-03 01:46:52
+==================================================================
+patch              | PoC          | benign_boundary_poc0
+-------------------+--------------+----------------
+p0 (patch.diff)    | DIVERGENT    | DIVERGENT     
+
+Interpretation (each cell = candidate patch vs vulnerable baseline):
+  * PoC = DIVERGENT       -> patch changes crash-path behaviour (candidate fix).
+  * benign_poc = EQUIVALENT -> patch preserves valid-input behaviour (no regression).
+  * patch_poc columns come from benign_patch_poc inputs (non-crashing on BOTH
+    builds, reaching the PATCHED code); treat like benign columns for regression.
+  * GOOD patch: DIVERGENT on PoC AND EQUIVALENT on every benign/patch_poc.
+  * BAD  patch: DIVERGENT on a benign/patch_poc input (breaks legitimate inputs).
+
+Instrumented: files=src/libopensc/card-iasecc.c funcs=iasecc_process_fci
+Instrument mode: patch-derived funcs: iasecc_process_fci (instrument_writes.py)
+
+==================================================================
+PER-INPUT COVERAGE (per build; confidence for the verdicts above)
+  reached        = target functions entered / total patched functions
+  writes covered = distinct instrumented write sites hit / total sites
+  post-change    = write sites AT/AFTER the patch's changed lines hit /
+                   total such sites (did the input exercise the PATCHED
+                   region, not just enter the function). n/a on vuln.
+==================================================================
+
+PER-INPUT COVERAGE on vulnerable (baseline) build:
+  input            | reached    | writes covered   | cover%   | post-change   
+  -----------------+------------+------------------+----------+---------------
+  PoC              | 1/1        | 8/16             | 50%      | n/a           
+  benign_boundary_poc0 | 1/1        | 8/16             | 50%      | n/a           
+
+PER-INPUT COVERAGE on p0 (patch.diff) build:
+  input            | reached    | writes covered   | cover%   | post-change   
+  -----------------+------------+------------------+----------+---------------
+  PoC              | 1/1        | 6/16             | 38%      | 0/2           
+  benign_boundary_poc0 | 1/1        | 6/16             | 38%      | 0/2           
