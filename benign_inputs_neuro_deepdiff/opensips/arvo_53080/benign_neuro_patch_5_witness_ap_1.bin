@@ -1,0 +1,3 @@
+INVITE sip:a@b SIP/2.0
+Via: SIP/2.0/UDP 1.2.3.4;branch=z9hG4bK1
+

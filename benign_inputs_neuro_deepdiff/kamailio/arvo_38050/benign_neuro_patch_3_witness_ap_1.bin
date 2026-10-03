@@ -1,0 +1,7 @@
+INVITE sip:a@b SIP/2.0
+Via: SIP/2.0/UDP h
+Content-Length: 10
+	 0
+Next: v
+
+0123456789

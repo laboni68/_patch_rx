@@ -1,0 +1,6 @@
+INVITE sip:a@b SIP/2.0
+Content-Length: 10
+	 
+To: sip:a@b
+
+0123456789

@@ -1,0 +1,6 @@
+# regression test for patch_4 empty_arg_ptr
+global
+	cmd foo bar baz qux
+	nbthread 1
+	timeout connect 5s
+	daemon

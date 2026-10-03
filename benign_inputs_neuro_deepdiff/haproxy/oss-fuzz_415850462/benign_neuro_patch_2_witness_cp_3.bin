@@ -1,0 +1,5 @@
+global
+	setenv FOO ""
+	nbthread 1
+	timeout connect 5s
+	daemon

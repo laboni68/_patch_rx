@@ -1,0 +1,5 @@
+defaults
+    mode http
+    timeout client 30000
+    option httplog
+server s1 "" check

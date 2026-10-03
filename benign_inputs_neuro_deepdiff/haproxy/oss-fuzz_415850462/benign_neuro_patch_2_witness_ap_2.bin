@@ -1,0 +1,2 @@
+# test config input for fuzz harness
+setenv FOO ''

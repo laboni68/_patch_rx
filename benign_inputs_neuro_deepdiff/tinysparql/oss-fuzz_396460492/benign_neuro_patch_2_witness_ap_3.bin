@@ -1,0 +1,2 @@
+@prefix a: <http://x/> .
+<http://a> <http://b> "v"^^<http://t> .

@@ -1,0 +1,4 @@
+INVITE sip:a@b SIP/2.0
+Via: SIP/2.0/UDP h.com;branch=z9hG4bKa
+Content-Length: 5
+ INVITE-continued

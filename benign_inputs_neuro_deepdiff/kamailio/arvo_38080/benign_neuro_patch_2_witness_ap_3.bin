@@ -1,0 +1,8 @@
+OPTIONS sip:a@b SIP/2.0
+Via: SIP/2.0/UDP host;branch=z9hG4bK1
+From: <sip:c@d>;tag=1
+Call-ID: 1@host
+CSeq: 1 OPTIONS
+Content-Length: 0
+To: <sip:a@b>;x="y"
+

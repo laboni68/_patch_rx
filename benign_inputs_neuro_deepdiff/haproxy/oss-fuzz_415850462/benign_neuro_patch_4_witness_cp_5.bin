@@ -1,0 +1,4 @@
+defaults
+    timeout connect 5s
+    foo "" bar
+    retries 3

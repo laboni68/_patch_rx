@@ -1,0 +1,3 @@
+global
+	tune.h2.header-table-size "" 4096
+	daemon

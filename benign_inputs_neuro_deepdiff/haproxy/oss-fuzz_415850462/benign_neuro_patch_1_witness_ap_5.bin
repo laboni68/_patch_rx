@@ -1,0 +1,6 @@
+global
+    maxconn 100
+    a;b
+    foo ""
+defaults
+    timeout connect 5000

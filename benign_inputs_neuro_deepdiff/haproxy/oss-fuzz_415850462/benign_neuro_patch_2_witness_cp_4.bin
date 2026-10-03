@@ -1,0 +1,4 @@
+# cp_r4 witness: empty single-quoted arg
+global
+	tune.maxrewrite '' 5
+	daemon

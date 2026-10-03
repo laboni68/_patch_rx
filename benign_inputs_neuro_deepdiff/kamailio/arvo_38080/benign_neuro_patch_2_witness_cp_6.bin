@@ -1,0 +1,8 @@
+INVITE sip:a@b.com SIP/2.0
+Via: SIP/2.0/UDP 1.2.3.4:5060;branch=z9hG4bK1
+To: "A" <sip:a@b.com>;foo="bar"
+From: <sip:c@d.com>;tag=1
+Call-ID: id1@1.2.3.4
+CSeq: 1 INVITE
+Content-Length: 0
+

@@ -1,0 +1,3 @@
+# regression test for parse_line empty-arg hint
+global
+    w x y z

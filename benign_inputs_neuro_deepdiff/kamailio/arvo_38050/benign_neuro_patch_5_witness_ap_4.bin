@@ -1,0 +1,7 @@
+INVITE sip:u@x SIP/2.0
+Via: SIP/2.0/UDP 1.2.3.4
+Content-Length: 10
+ 
+Subject: x
+
+1234567890

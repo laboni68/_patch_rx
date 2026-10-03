@@ -1,0 +1,4 @@
+# haproxy fuzz config for benign regression test
+foo bar
+baz qux quux
+

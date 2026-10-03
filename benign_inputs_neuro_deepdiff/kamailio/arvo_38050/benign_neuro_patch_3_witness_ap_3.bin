@@ -1,0 +1,7 @@
+INVITE sip:u@x SIP/2.0
+Via: SIP/2.0/UDP 1.2.3.4:5060;branch=z9hG4bK1
+Content-Length: 5
+ 
+X: y
+
+hello

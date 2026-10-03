@@ -1,0 +1,4 @@
+global
+    log stdout format raw local0
+foo bar 
+foo "" baz 

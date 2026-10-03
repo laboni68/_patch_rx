@@ -1,0 +1,15 @@
+MAP
+  NAME "benign_ap5"
+  SIZE 1 1
+  EXTENT -180 -90 180 90
+  UNITS DD
+  IMAGETYPE "png"
+  LAYER
+    NAME "layer0"
+    TYPE POINT
+    STATUS OFF
+    PROJECTION
+      "init=epsg:4326"
+    END
+  END
+END

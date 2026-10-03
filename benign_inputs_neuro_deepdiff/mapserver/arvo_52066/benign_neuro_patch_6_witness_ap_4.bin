@@ -1,0 +1,5 @@
+MAP
+ PROJECTION
+  "init=epsg:4326"
+ END
+END

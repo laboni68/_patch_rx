@@ -1,0 +1,12 @@
+global
+	nbthread 1
+	setenv FOO "" bar
+	daemon
+defaults
+	mode tcp
+	timeout client 5s
+	timeout server 5s
+	timeout connect 5s
+frontend ft
+	bind :8080
+	tcp-request content set-var(txn.a) "" foo

@@ -1,0 +1,15 @@
+INVITE sip:bob@10.0.0.2 SIP/2.0
+Via: SIP/2.0/UDP 10.0.0.1:5060;branch=z9hG4bK776
+From: <sip:alice@10.0.0.1>;tag=1928301774
+To: <sip:bob@10.0.0.2>
+Call-ID: a84b4c76e66710@10.0.0.1
+CSeq: 314159 INVITE
+Contact: <sip:alice@10.0.0.1>
+Content-Type: application/sdp
+Content-Length: 78
+
+v=0
+o=- 1 2 IN IP4 10.0.0.1
+s=-
+c=IN IP4 10.0.0.1
+m=audio 5000 RTP/AVP 0

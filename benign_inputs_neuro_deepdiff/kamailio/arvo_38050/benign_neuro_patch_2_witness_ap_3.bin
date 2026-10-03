@@ -1,0 +1,4 @@
+INVITE sip:a SIP/2.0
+Via: SIP/2.0/UDP a
+Content-Length: 10
+	x

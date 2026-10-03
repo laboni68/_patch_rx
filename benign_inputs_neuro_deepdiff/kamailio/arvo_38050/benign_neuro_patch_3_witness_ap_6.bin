@@ -1,0 +1,7 @@
+OPTIONS sip:a@b SIP/2.0
+Via: SIP/2.0/UDP host
+Content-Length: 12
+	 
+Other: x
+
+Hello World!

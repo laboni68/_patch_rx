@@ -1,0 +1,27 @@
+MAP
+  NAME "benign_witness_cp2"
+  SIZE 1 1
+  EXTENT 0 0 1 1
+  PROJECTION
+    "proj=lcc"
+    "lat_1=1"
+    "lat_2=2"
+    "lat_0=3"
+    "lon_0=4"
+    "x_0=5"
+    "y_0=6"
+    "ellps=GRS80"
+    "datum=NAD83"
+    "units=m"
+    "no_defs"
+    "a=1"
+    "b=2"
+    "k=1"
+    "towgs84=0,0,0"
+    "axis=enu"
+    "over"
+    "wktext"
+    "geoidgrids=x"
+    "nadgrids=@null"
+  END
+END

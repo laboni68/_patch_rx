@@ -1,0 +1,17 @@
+INVITE sip:u@x.com SIP/2.0
+Via: SIP/2.0/UDP 127.0.0.1:5060;branch=z9hG4bK1
+From: <sip:a@x.com>;tag=1
+To: <sip:u@x.com>
+Call-ID: 1@x
+CSeq: 1 INVITE
+Content-Type: application/sdp
+Content-Length: 149
+
+v=0
+o=- 0 0 IN IP4 0.0.0.0
+s=-
+c=IN IP4 0.0.0.0
+t=0 0
+m=audio 5000 RTP/AVP 0
+a=candidate: 1 udp 2130706431 10.0.0.1 5000 typ host
+a=sendrecv

@@ -1,0 +1,2 @@
+# haproxy fuzz config padding to fifty bytes xx
+foo "" bar

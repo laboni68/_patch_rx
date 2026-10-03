@@ -1,0 +1,6 @@
+INVITE sip:a@b SIP/2.0
+Content-Length: 7
+ 
+To: <sip:x>
+
+1234567

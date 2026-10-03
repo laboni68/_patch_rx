@@ -1,0 +1,28 @@
+MAP
+  NAME "test"
+  STATUS ON
+  SIZE 640 480
+  EXTENT -180 -90 180 90
+  PROJECTION
+    "proj=lcc"
+    "lat_0=0"
+    "lat_1=1"
+    "lat_2=2"
+    "lon_0=3"
+    "x_0=0"
+    "y_0=0"
+    "ellps=GRS80"
+    "datum=NAD83"
+    "units=m"
+    "no_defs"
+    "a=1"
+    "b=2"
+    "k_0=1"
+    "towgs84=0,0,0"
+    "pm=0"
+    "axis=enu"
+    "geoidgrids=x"
+    "nadgrids=@null"
+    "wktext"
+  END
+END

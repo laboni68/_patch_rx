@@ -1,0 +1,24 @@
+MAP
+  PROJECTION
+    "proj=utm"
+    "zone=17"
+    "datum=WGS84"
+    "units=m"
+    "no_defs"
+    "ellps=WGS84"
+    "towgs84=0,0,0"
+    "a=6378137"
+    "b=6356752.3142"
+    "lat_0=0"
+    "lon_0=-81"
+    "k=0.9996"
+    "x_0=500000"
+    "y_0=0"
+    "pm=greenwich"
+    "rf=298.257223563"
+    "to_meter=1"
+    "nadgrids=@null"
+    "wktext"
+    "over"
+  END
+END

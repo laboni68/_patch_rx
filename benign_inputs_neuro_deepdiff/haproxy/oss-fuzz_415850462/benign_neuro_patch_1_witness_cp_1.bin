@@ -1,0 +1,6 @@
+global
+    maxconn 4096
+    nbthread 1
+
+defaults
+    timeout connect ""

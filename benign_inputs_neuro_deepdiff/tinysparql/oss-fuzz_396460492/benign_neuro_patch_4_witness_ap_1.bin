@@ -1,0 +1,2 @@
+@prefix foo: <http://example.org/> .
+foo:a foo:b "x" .

@@ -1,0 +1,3 @@
+# benign regression test input
+foo "" bar
+foo bar

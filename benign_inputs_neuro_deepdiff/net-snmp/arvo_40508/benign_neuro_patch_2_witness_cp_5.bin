@@ -1,0 +1,14 @@
+TEST-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+    MODULE-IDENTITY, enterprises
+        FROM SNMPv2-SMI;
+
+testMIB MODULE-IDENTITY
+    LAST-UPDATED "202111010000Z"
+    ORGANIZATION "Test Organization"
+    CONTACT-INFO "Test Contact"
+    DESCRIPTION  "A test MIB for fuzzing"
+    ::= { enterprises 99999 }
+
+END

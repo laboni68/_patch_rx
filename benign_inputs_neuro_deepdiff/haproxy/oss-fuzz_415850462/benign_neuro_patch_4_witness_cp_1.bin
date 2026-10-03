@@ -1,0 +1,6 @@
+# benign witness cp_r1: empty quoted args, argsmax=64
+global
+	foo "" bar
+	setenv KEY "" value
+	maxconn 100
+	daemon

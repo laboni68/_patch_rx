@@ -1,0 +1,5 @@
+global
+    foo bar
+defaults
+    mode http
+    timeout connect 5000

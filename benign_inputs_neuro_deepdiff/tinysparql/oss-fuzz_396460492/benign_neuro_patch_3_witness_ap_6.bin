@@ -1,0 +1,2 @@
+@prefix ex: <http://example/> .
+<http://a> <http://b> "c" .

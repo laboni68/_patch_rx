@@ -1,0 +1,6 @@
+# benign: witness ap_r6 for patch_6
+global
+	foo bar
+	alpha beta gamma delta
+	daemon
+

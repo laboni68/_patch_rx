@@ -1,0 +1,7 @@
+OPTIONS sip:a@b SIP/2.0
+Via: SIP/2.0/UDP host
+Content-Length: 10
+ 
+Other: x
+
+0123456789

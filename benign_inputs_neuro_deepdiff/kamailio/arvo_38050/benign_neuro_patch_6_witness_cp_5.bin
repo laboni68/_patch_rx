@@ -1,0 +1,4 @@
+OPTIONS sip:a@b SIP/2.0
+Content-Length: 10
+ 
+

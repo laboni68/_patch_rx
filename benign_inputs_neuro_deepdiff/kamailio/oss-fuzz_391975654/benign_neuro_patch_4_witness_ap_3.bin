@@ -1,0 +1,15 @@
+INVITE sip:bob@example.com SIP/2.0
+Via: SIP/2.0/UDP 10.0.0.1:5060;branch=z9hG4bK1234
+From: <sip:alice@example.com>;tag=1234
+To: <sip:bob@example.com>
+Call-ID: a1b2c3@example.com
+CSeq: 1 INVITE
+Content-Type: application/sdp
+Content-Length: 88
+
+v=0
+o=user 1 2 IN IP4 10.0.0.1
+s=-
+c=IN IP4 10.0.0.1
+t=0 0
+m=audio 5000 RTP/AVP 0

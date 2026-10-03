@@ -1,0 +1,5 @@
+global
+	nbthread 1
+	setenv CMD '' tail
+	daemon
+# pad to meet 50-byte minimum for fuzz harness

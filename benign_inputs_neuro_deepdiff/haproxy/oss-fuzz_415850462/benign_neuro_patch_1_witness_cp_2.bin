@@ -1,0 +1,12 @@
+# benign regression: normal args, no empty-arg hint expected
+defaults
+    timeout connect 5s
+    timeout client 30s
+    timeout server 30s
+    mode http
+    option httplog
+    retries 3
+
+listen myapp
+    bind 127.0.0.1:8080
+    server s1 127.0.0.1:9000 check

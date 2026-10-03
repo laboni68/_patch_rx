@@ -1,0 +1,4 @@
+defaults
+    timeout connect 5s
+    maxconn 4096
+    retries 3

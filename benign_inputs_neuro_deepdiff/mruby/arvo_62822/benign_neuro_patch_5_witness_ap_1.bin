@@ -1,0 +1,1 @@
+"\xab\xcd".unpack("B4")

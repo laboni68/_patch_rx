@@ -1,0 +1,7 @@
+INVITE sip:a@b SIP/2.0
+Via: SIP/2.0/UDP x
+Content-Length: 5
+ 
+X-Tag: v
+
+hello

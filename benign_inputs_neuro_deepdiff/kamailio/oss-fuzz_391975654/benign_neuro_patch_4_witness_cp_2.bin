@@ -1,0 +1,16 @@
+INVITE sip:bob@example.com SIP/2.0
+Via: SIP/2.0/UDP client.example.com:5060;branch=z9hG4bKcp2
+Max-Forwards: 70
+From: <sip:alice@example.com>;tag=5678
+To: <sip:bob@example.com>
+Call-ID: benign-p4-cp2@example.com
+CSeq: 1 INVITE
+Contact: <sip:alice@client.example.com>
+Content-Type: application/sdp
+Content-Length: 77
+
+v=0
+o=- 1 1 IN IP4 1.2.3.4
+s=-
+c=IN IP4 10.0.0.1
+m=audio 5000 RTP/AVP 0

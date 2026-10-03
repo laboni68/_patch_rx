@@ -1,0 +1,9 @@
+OPTIONS sip:user@example.com SIP/2.0
+Via: SIP/2.0/UDP host.com:5060;branch=z9hG4bK1
+Max-Forwards: 70
+To: <sip:user@example.com>
+From: <sip:caller@example.com>;tag=abc123
+Call-ID: test1@host.com
+CSeq: 1 OPTIONS
+Content-Length: 0
+

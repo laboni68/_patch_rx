@@ -1,0 +1,8 @@
+INVITE sip:bob@example.com SIP/2.0
+Via: SIP/2.0/UDP 10.0.0.1:5060;branch=z9hG4bKabcd
+From: <sip:alice@example.com>;tag=1234
+To: <sip:bob@example.com>
+Call-ID: abcdef@example.com
+CSeq: 1 INVITE
+Content-Length: 0
+

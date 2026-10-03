@@ -1,0 +1,5 @@
+INVITE sip:foo@bar SIP/2.0
+Via: SIP/2.0/UDP 127.0.0.1:5060;branch=z9hG4bK1
+Content-Length: 5
+ 
+

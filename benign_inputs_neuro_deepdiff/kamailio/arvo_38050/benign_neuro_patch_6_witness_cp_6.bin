@@ -1,0 +1,6 @@
+INVITE sip:bob@example.com SIP/2.0
+Via: SIP/2.0/UDP 127.0.0.1
+Content-Length: 10
+ 
+
+0123456789

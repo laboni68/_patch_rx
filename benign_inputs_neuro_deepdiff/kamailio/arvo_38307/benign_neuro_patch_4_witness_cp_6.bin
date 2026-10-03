@@ -1,0 +1,3 @@
+INVITE sip:bob@example.com SIP/2.0
+Via: SIP/2.0/UDP h;branch=z9hG4bK1
+

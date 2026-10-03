@@ -1,0 +1,4 @@
+global
+	log-format ""
+	daemon
+# padding to reach 50 bytes minimum

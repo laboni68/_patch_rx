@@ -1,0 +1,3 @@
+INVITE sip:alice@example.com SIP/2.0
+To: <sip:alice@example.com>;tag=1;x="abc"
+

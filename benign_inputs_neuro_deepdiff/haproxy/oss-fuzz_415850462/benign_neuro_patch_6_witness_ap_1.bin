@@ -1,0 +1,5 @@
+global
+    maxconn 100
+    log stdout local0
+    daemon
+    nbthread 4

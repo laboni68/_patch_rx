@@ -1,0 +1,6 @@
+global
+    maxconn 1024
+    daemon
+
+defaults
+    timeout connect 5000
