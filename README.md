@@ -13,7 +13,7 @@ The patches are saved in the ```patches``` folder. To run the vulnerable project
 - ```deepdiff_pipeline.sh``` is the script for running the dynamic analysis pipeline of our regression-freedom checking approach which uses internally other scripts like ```gen_benign.py``` and ```instrument_writes.py``` files.
 - Requires Docker with access to the OSS-Fuzz base images. Reading a matrix:
 `benign = EQUIVALENT` means it preserves valid-input behaviour; a good patch is EQUIVALENT on every benign input.
-- ```run_all_deepdiff.sh``` runs the ```deepdiff_pipeline.sh``` for the projects. ```scripts/run_all_deepdiff.sh --use-existing-pocs`` will use the existing benign inputs generated to run dynamic analysis (default root folder: subset_cyberGym/projects like cybergym)
+- ```run_all_deepdiff.sh``` runs the ```deepdiff_pipeline.sh``` for the projects. ```scripts/run_all_deepdiff.sh --use-existing-pocs``` will use the existing benign inputs generated to run dynamic analysis (default root folder: subset_cyberGym/projects like cybergym)
 
 ## benign_inputs_neuro_deepdiff
 - the benign inputs are concrete benign inputs generated from the candidate witnesses from the neuro-deepdiff.
